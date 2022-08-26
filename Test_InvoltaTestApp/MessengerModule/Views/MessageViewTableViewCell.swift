@@ -63,6 +63,7 @@ class MessageViewTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        layer.removeAllAnimations() // ?
         messageAuthorIconImage.set(imageURL: nil)
     }
     
@@ -85,6 +86,8 @@ class MessageViewTableViewCell: UITableViewCell {
         messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
         messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.text = viewModel.message
+        
+        print("animate: \(viewModel.animationData.needToAnimate)")
         
         if(!viewModel.animationData.needToAnimate){
             slidingView.frame = bounds

@@ -18,8 +18,27 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var maxMessagesDetected: Int? // to use or not to use?
     
     var lastScrollTopPoint: CGFloat = 0
-        
-    // MARK: TableViewRelated
+    
+    func viewDidLoad() {
+        tryToLoadMessages(messageOffset: 0)
+    }
+    
+    func getMessages() {
+        tryToLoadMessages(messageOffset: messageItems.count)
+    }
+    
+    private func tryToLoadMessages(messageOffset: Int){
+        if !isFetchingContent {
+            //print("LOADING MESSAGES")
+            isFetchingContent = true
+            view?.onFetchMessagesStarted(isInitialLoad: messageOffset == 0)
+            interactor?.loadMessages(messageOffset: messageOffset)
+        }
+    }
+}
+
+// MARK: TableViewRelated
+extension MessengerPresenter: MessengerViewToPresenterTableViewProtocol {
     
     func canScrollProgrammatically() -> Bool {
         return messageItems.count > 0
@@ -43,7 +62,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
         // check appear time delay
         var timeDelay: Double = 0
         if(messageItems[indexPath.row].animationData.needToAnimate){
-            timeDelay = calculateTimeDelayBeforeAnimation()
+            timeDelay = UIHelpers.calculateTimeDelayBeforeAnimation()
             messageItems[indexPath.row].animationData.delayBeforeAnimation = timeDelay
         }
         
@@ -62,53 +81,11 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
         
         // direction - up
         if topPoint > lastScrollTopPoint {
-            //print("topPoint: \(topPoint), scrollPointToLoadMoreContent: \(scrollPointToLoadMoreContent)")
-            
             if(topPoint >= scrollPointToLoadMoreContent){
-                //print("fetch more data")
                 getMessages()
             }
         }
         lastScrollTopPoint = topPoint
-    }
-    
-    
-    
-    func viewDidLoad() {
-        tryToLoadMessages(messageOffset: 0)
-    }
-    
-    func getMessages() {
-        tryToLoadMessages(messageOffset: messageItems.count)
-    }
-    
-    private func tryToLoadMessages(messageOffset: Int){
-        if !isFetchingContent {
-            print("LOADING MESSAGES")
-            isFetchingContent = true
-            view?.onFetchMessagesStarted(isInitialLoad: messageOffset == 0)
-            interactor?.loadMessages(messageOffset: messageOffset)
-        }
-    }
-    
-    // Calculate cell push animation delay
-    var lastItemPushed: DispatchTime?
-    
-    func calculateTimeDelayBeforeAnimation() -> Double {
-        var thisTimeDelay: TimeInterval!
-        if lastItemPushed == nil {
-            thisTimeDelay = 0
-            lastItemPushed = DispatchTime.now()
-        } else if let lastItemPushed = lastItemPushed{
-            let timeDiff = lastItemPushed.distance(to: .now())
-            if(timeDiff.double() > MessageCellConstants.cellOpeningAnimationInterval) {
-                thisTimeDelay = 0
-            }else{
-                thisTimeDelay = MessageCellConstants.cellOpeningAnimationInterval - timeDiff.double()
-            }
-            self.lastItemPushed = DispatchTime.now() + thisTimeDelay
-        }
-        return thisTimeDelay
     }
 }
 

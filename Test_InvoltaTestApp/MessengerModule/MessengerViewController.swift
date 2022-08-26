@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
-    var presenter: MessengerViewToPresenterProtocol?
+    var presenter: MessengerPresenterProtocols?
     
     var loadingView: LoadingView = {
         let loadingView = LoadingView()
@@ -59,7 +59,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         if isInitialLoad {
             loadingView.startLoading()
         } else {
-            tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         }
     }
     

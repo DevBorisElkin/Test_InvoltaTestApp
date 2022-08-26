@@ -34,4 +34,25 @@ class UIHelpers{
         alert.addAction(UIAlertAction(title: "Okay", style: .cancel))
         return alert
     }
+    
+    // Calculate cell push animation delay
+    private static var lastItemPushed: DispatchTime?
+    
+    static func calculateTimeDelayBeforeAnimation() -> Double {
+        var thisTimeDelay: TimeInterval!
+        if lastItemPushed == nil {
+            thisTimeDelay = 0
+            lastItemPushed = DispatchTime.now()
+        } else if let lastItemPushed = lastItemPushed{
+            let timeDiff = lastItemPushed.distance(to: .now())
+            if(timeDiff.double() > MessageCellConstants.cellOpeningAnimationInterval) {
+                thisTimeDelay = 0
+            }else{
+                thisTimeDelay = MessageCellConstants.cellOpeningAnimationInterval - timeDiff.double()
+            }
+            self.lastItemPushed = DispatchTime.now() + thisTimeDelay
+        }
+        //print("thisTimeDelay: \(thisTimeDelay)")
+        return thisTimeDelay
+    }
 }

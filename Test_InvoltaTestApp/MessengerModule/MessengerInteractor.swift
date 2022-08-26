@@ -34,7 +34,7 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
                     messagesData = data
                 case .failure(let error):
                     currentFailedRequests += 1
-                    print("failed at request, currentFailedRequests: \(currentFailedRequests)")
+                    //print("failed at request, currentFailedRequests: \(currentFailedRequests)")
                     self?.presenter?.onMessagesLoadingFailed(error: error, ranOutOfAttempts: false)
                 case .none:
                     break
@@ -42,12 +42,12 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
             }
             
             guard let messagesData = messagesData else {
-                print("currentFailedRequests: \(currentFailedRequests)\nsearch failed for undefined reason")
+                //print("currentFailedRequests: \(currentFailedRequests)\nsearch failed for undefined reason")
                 let ranOutOfAttempts = currentFailedRequests == AppConstants.consecutiveNetworkAttempts
                 self?.presenter?.onMessagesLoadingFailed(error: NetworkingHelpers.NetworkRequestError.undefined, ranOutOfAttempts: ranOutOfAttempts)
                 return }
             
-            print("Network request succeeded from attempt: \(currentFailedRequests)")
+            //print("Network request succeeded from attempt: \(currentFailedRequests)")
             self?.presenter?.receivedMessages(messagesData: messagesData)
         }
     }

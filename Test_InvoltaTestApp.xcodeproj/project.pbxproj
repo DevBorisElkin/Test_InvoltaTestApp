@@ -112,11 +112,11 @@
 		525EF9FE28B8EF35007E0311 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				525EFA0728B8F0C4007E0311 /* UIHelpers.swift */,
 				525EF9FF28B8F04E007E0311 /* Constraints.swift */,
 				525EFA0128B8F06E007E0311 /* NetworkingHelpers.swift */,
 				525EFA0328B8F086007E0311 /* HttpResponses.swift */,
 				525EFA0528B8F0A9007E0311 /* TextHeight.swift */,
-				525EFA0728B8F0C4007E0311 /* UIHelpers.swift */,
 				525EFA2028B90AF2007E0311 /* NetworkRequestBuilder.swift */,
 				525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */,
 				525EFA1F28B90AA9007E0311 /* LayoutCalculators */,
