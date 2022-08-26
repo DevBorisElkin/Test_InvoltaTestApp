@@ -32,6 +32,7 @@
 		525EFA2A28B937F0007E0311 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2928B937F0007E0311 /* LoadingView.swift */; };
 		525EFA2C28B948B4007E0311 /* MessagesTableViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */; };
 		525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */; };
+		525EFA3028B96A3E007E0311 /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		525EFA2928B937F0007E0311 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewConstants.swift; sourceTree = "<group>"; };
 		525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkingFooterView.swift; sourceTree = "<group>"; };
+		525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				525EFA0528B8F0A9007E0311 /* TextHeight.swift */,
 				525EFA0728B8F0C4007E0311 /* UIHelpers.swift */,
 				525EFA2028B90AF2007E0311 /* NetworkRequestBuilder.swift */,
+				525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */,
 				525EFA1F28B90AA9007E0311 /* LayoutCalculators */,
 			);
 			path = Helpers;
@@ -250,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525EFA3028B96A3E007E0311 /* GeneralHelpers.swift in Sources */,
 				525EFA1C28B8FC35007E0311 /* MessageViewTableViewCell.swift in Sources */,
 				525EFA1228B8F8BA007E0311 /* MessengerPresenter.swift in Sources */,
 				525EFA1028B8F8AA007E0311 /* MessengerViewController.swift in Sources */,

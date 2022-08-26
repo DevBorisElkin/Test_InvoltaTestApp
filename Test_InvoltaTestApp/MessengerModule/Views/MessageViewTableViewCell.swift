@@ -11,6 +11,13 @@ import UIKit
 class MessageViewTableViewCell: UITableViewCell {
     static let reuseId = "MessageViewTableViewCell"
     
+    lazy var containerView: UIView = {
+        let view = UIView()
+        //view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     lazy var cardView: UIView = {
         let view = UIView()
         //view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +72,8 @@ class MessageViewTableViewCell: UITableViewCell {
     
     func setUpConstraints(){
         // MARK: cardView
-        addSubview(cardView)
+        addSubview(containerView)
+        containerView.addSubview(cardView)
         //cardView.fillSuperview(padding: MessageCellConstants.cardViewOffset)
         
         // MARK: subviews of card view
@@ -74,7 +82,9 @@ class MessageViewTableViewCell: UITableViewCell {
         cardView.addSubview(messageTextLabel)
     }
     
-    func setUp(viewModel: MessageItemViewModel, openingAnimation: Bool){
+    func setUp(viewModel: MessageItemViewModel){
+        containerView.frame = frame
+        
         //messageAuthorIconImage.frame = CGRect(x: -15, y: 5, width: 50, height: 50)
         messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
         messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
@@ -85,14 +95,19 @@ class MessageViewTableViewCell: UITableViewCell {
         messageTextLabel.frame = viewModel.sizes.messageTextFrame
         messageTextLabel.text = viewModel.message
         
-        if(openingAnimation){
+        if(viewModel.animationData.needToAnimate){
             cardView.frame.size = viewModel.sizes.cardViewFrame.size
             cardView.frame.origin = viewModel.sizes.cardViewInitialPoint
+            let scale = MessageCellConstants.cellInitialScale
+            let targetScale =  MessageCellConstants.cellTargetScale
+            cardView.transform = CGAffineTransform(scaleX: scale, y: scale)
             
-            UIView.animate(withDuration: 2) { [weak self] in
-                //self?.frame.origin = viewModel.sizes.cardViewFrame.origin // cool actually
+            UIView.animate(withDuration: viewModel.animationData.animationTime, delay: viewModel.animationData.delayBeforeAnimation ) { [weak self] in
                 self?.cardView.frame.origin = viewModel.sizes.cardViewFrame.origin
+                //self?.cardView.transform = CGAffineTransform(scaleX: targetScale, y: targetScale)
+                self?.cardView.transform = .identity
             }
+            
         }else{
             cardView.frame = viewModel.sizes.cardViewFrame
         }

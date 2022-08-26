@@ -8,13 +8,18 @@
 import Foundation
 import UIKit
 
-typealias MessageItem = (messageData: MessageItemViewModel, shouldAnimate: Bool)
-
 struct MessageItemViewModel {
     var authorRandomName: String
     var authorRandomImageUrl: String
     var message: String
     var sizes: Sizes
+    var animationData = AnimationSupportingData()
+    
+    struct AnimationSupportingData {
+        var needToAnimate: Bool = true
+        var delayBeforeAnimation: Double = 0
+        var animationTime: Double = MessageCellConstants.cellOpeningAnimationDuration
+    }
     
     struct Sizes {
         var cardViewInitialPoint: CGPoint

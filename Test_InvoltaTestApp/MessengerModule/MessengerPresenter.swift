@@ -13,8 +13,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var interactor: MessengerPresenterToInteractorProtocol?
     var router: MessengerPresenterToRouterProtocol?
     
-    
-    var messageItems: [MessageItem] = []
+    var messageItems: [MessageItemViewModel] = []
     var isFetchingContent = false
     var maxMessagesDetected: Int? // to use or not to use?
         
@@ -24,19 +23,26 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Present cell at: \(indexPath.row)")
+        //print("Present cell at: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: MessageViewTableViewCell.reuseId, for: indexPath) as! MessageViewTableViewCell
         
         //cell.contentView.transform = CGAffineTransform (scaleX: 1,y: -1);
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         
-        cell.setUp(viewModel: messageItems[indexPath.row].messageData, openingAnimation: messageItems[indexPath.row].shouldAnimate)
-        messageItems[indexPath.row].shouldAnimate = false
+        // check time delay
+        var timeDelay: Double = 0
+        if(messageItems[indexPath.row].animationData.needToAnimate){
+            timeDelay = calculateTimeDelayBeforeAnimation()
+            messageItems[indexPath.row].animationData.delayBeforeAnimation = timeDelay
+        }
+        
+        cell.setUp(viewModel: messageItems[indexPath.row])
+        messageItems[indexPath.row].animationData.needToAnimate = false
         return cell
     }
     
     func tableViewCellHeight(at indexPath: IndexPath) -> CGFloat {
-        return messageItems[indexPath.row].messageData.sizes.cellHeight
+        return messageItems[indexPath.row].sizes.cellHeight
     }
     
     func viewDidLoad() {
@@ -54,12 +60,32 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
             interactor?.loadMessages(messageOffset: messageOffset)
         }
     }
+    
+    // Calculate cell push animation delay
+    var lastItemPushed: DispatchTime?
+    
+    func calculateTimeDelayBeforeAnimation() -> Double {
+        var thisTimeDelay: TimeInterval!
+        if lastItemPushed == nil {
+            thisTimeDelay = 0
+            lastItemPushed = DispatchTime.now()
+        } else if let lastItemPushed = lastItemPushed{
+            let timeDiff = lastItemPushed.distance(to: .now())
+            if(timeDiff.double() > MessageCellConstants.cellOpeningAnimationInterval) {
+                thisTimeDelay = 0
+            }else{
+                thisTimeDelay = MessageCellConstants.cellOpeningAnimationInterval - timeDiff.double()
+            }
+            self.lastItemPushed = DispatchTime.now() + thisTimeDelay
+        }
+        return thisTimeDelay
+    }
 }
 
 extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
     func receivedMessages(messagesData: MessagesWrapped) {
         
-        var messageItems = [MessageItem]()
+        var messageItems = [MessageItemViewModel]()
         
         for i in 0 ..< messagesData.result.count {
             
@@ -72,7 +98,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
                                           authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),
                                                    message: messageText, sizes: sizes)
             
-            messageItems.append((messageItem, true))
+            messageItems.append(messageItem)
         }
         self.messageItems.append(contentsOf: messageItems)
         
