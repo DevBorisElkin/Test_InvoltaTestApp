@@ -77,7 +77,8 @@ class MessageViewTableViewCell: UITableViewCell {
     func setUp(viewModel: MessageItemViewModel){
         print("received image url: \(viewModel.authorRandomImageUrl)")
         messageAuthorIconImage.frame = CGRect(x: 5, y: 5, width: 50, height: 50)
-        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        //messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        messageAuthorIconImage.setImage(imageUrlString: viewModel.authorRandomImageUrl)
         messageAuthorLabel.frame = CGRect(x: 60, y: 5, width: 200, height: 50)
         messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.frame = CGRect(x: 60, y: 60, width: 200, height: 50)

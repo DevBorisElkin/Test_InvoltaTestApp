@@ -47,4 +47,23 @@ class WebImageView: UIImageView {
             self.image = UIImage(data: data)
         }
     }
+    
+    // _____
+    
+    func setImage(imageUrlString: String) {
+        DispatchQueue.global(qos: .background).async {
+            var image = WebImageView.loadImageForImageView(urlString: imageUrlString)
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }
+        
+        
+    }
+    
+    static func loadImageForImageView(urlString: String) -> UIImage? {
+        guard let url = URL(string: urlString) else {print("Wrong URL to load image"); return nil }
+        guard let imageData = try? Data(contentsOf: url) else {print("Something is wrong with loaded image, returning"); return nil }
+        return UIImage(data: imageData)
+    }
 }

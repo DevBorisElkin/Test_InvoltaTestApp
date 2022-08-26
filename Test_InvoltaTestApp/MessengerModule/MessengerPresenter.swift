@@ -51,7 +51,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         
         for i in 0 ..< messagesData.result.count {
             let messageItem = MessageItemViewModel(authorRandomName: "Bob",
-                                          authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),
+                                          authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i) /*"https://picsum.photos/300/300"*/,
                                           message: messagesData.result[i])
             messageItems.append(messageItem)
         }
