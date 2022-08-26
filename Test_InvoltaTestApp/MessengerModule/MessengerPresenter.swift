@@ -14,11 +14,10 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var router: MessengerPresenterToRouterProtocol?
     
     var messageItems: [MessageItemViewModel] = []
-    
-    func viewDidLoad() {
-        interactor?.loadMessages(messageOffset: 0)
-    }
-    
+    var isFetchingContent = false
+    var maxMessagesDetected: Int? // to use or not to use?
+        
+    // MARK: TableViewRelated
     func numberOfRowsInSection() -> Int {
         return messageItems.count
     }
@@ -37,11 +36,21 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
         return messageItems[indexPath.row].sizes.cellHeight
     }
     
-    func getMessages() {
-        
+    func viewDidLoad() {
+        tryToLoadMessages(messageOffset: 0)
     }
     
+    func getMessages() {
+        tryToLoadMessages(messageOffset: messageItems.count)
+    }
     
+    private func tryToLoadMessages(messageOffset: Int){
+        if !isFetchingContent {
+            isFetchingContent = true
+            view?.onFetchMessagesStarted()
+            interactor?.loadMessages(messageOffset: messageOffset)
+        }
+    }
 }
 
 extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
@@ -61,15 +70,22 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
                                                    message: messageText, sizes: sizes)
             messageItems.append(messageItem)
         }
-        self.messageItems = messageItems
+        self.messageItems.append(contentsOf: messageItems)
         
         DispatchQueue.main.async { [weak self] in
             self?.view?.onFetchMessagesCompleted()
         }
         
+        isFetchingContent = false
     }
     
-    func onMessagesLoadingFailed(error: Error) {
-        view?.onFetchMessagesFail(error: error)
+    func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.onFetchMessagesFail(error: error, ranOutOfAttempts: ranOutOfAttempts)
+        }
+        
+        if ranOutOfAttempts {
+            isFetchingContent = false
+        }
     }
 }

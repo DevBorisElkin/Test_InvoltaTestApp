@@ -32,7 +32,7 @@ class MessageViewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.backgroundColor = .brown
+        //label.backgroundColor = .brown
         label.font = MessageCellConstants.messageAuthorFont
         label.textColor = MessageCellConstants.messageAuthorFontColor
         return label
@@ -42,7 +42,7 @@ class MessageViewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.backgroundColor = .blue
+        //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageTextFont
         label.textColor = MessageCellConstants.messageTextFontColor
         return label

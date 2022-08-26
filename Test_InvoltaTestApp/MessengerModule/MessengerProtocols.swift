@@ -27,7 +27,7 @@ protocol MessengerPresenterToViewProtocol: AnyObject {
     
     func onFetchMessagesStarted()
     func onFetchMessagesCompleted()
-    func onFetchMessagesFail(error: Error)
+    func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool)
 }
 
 protocol MessengerPresenterToInteractorProtocol: AnyObject {
@@ -38,7 +38,7 @@ protocol MessengerPresenterToInteractorProtocol: AnyObject {
 
 protocol MessengerInteractorToPresenterProtocol: AnyObject {
     func receivedMessages(messagesData: MessagesWrapped)
-    func onMessagesLoadingFailed(error: Error)
+    func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool)
 }
 
 typealias EntryPoint = MessengerPresenterToViewProtocol & UIViewController

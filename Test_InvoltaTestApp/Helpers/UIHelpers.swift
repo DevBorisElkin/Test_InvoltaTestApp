@@ -16,6 +16,7 @@ class UIHelpers{
     
     public static func createSpinnerFooterWithConstraints(frame: CGRect) -> UIView{
         let footerView = UIView(frame: frame)
+        footerView.backgroundColor = .brown
         
         let spinner = UIActivityIndicatorView()
         spinner.translatesAutoresizingMaskIntoConstraints = false

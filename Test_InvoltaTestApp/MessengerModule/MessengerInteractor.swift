@@ -25,13 +25,17 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
                 
                 resultVideosData = await NetworkingHelpers.loadDataFromUrlString(from: requestUrlString, printJsonAndRequestString: false)
                 
+                if AppConstants.messagesRequestArtificialDelay > 0 {
+                    Thread.sleep(forTimeInterval: AppConstants.messagesRequestArtificialDelay)
+                }
+                
                 switch resultVideosData {
                 case .success(let data):
                     messagesData = data
                 case .failure(let error):
                     currentFailedRequests += 1
                     print("failed at request, currentFailedRequests: \(currentFailedRequests)")
-                    self?.presenter?.onMessagesLoadingFailed(error: error)
+                    self?.presenter?.onMessagesLoadingFailed(error: error, ranOutOfAttempts: false)
                 case .none:
                     break
                 }
@@ -39,7 +43,8 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
             
             guard let messagesData = messagesData else {
                 print("currentFailedRequests: \(currentFailedRequests)\nsearch failed for undefined reason")
-                self?.presenter?.onMessagesLoadingFailed(error: NetworkingHelpers.NetworkRequestError.undefined)
+                let ranOutOfAttempts = currentFailedRequests == AppConstants.consecutiveNetworkAttempts
+                self?.presenter?.onMessagesLoadingFailed(error: NetworkingHelpers.NetworkRequestError.undefined, ranOutOfAttempts: ranOutOfAttempts)
                 return }
             
             print("Network request succeeded from attempt: \(currentFailedRequests)")
