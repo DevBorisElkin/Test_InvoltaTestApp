@@ -16,8 +16,19 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var messageItems: [MessageItemViewModel] = []
     var isFetchingContent = false
     var maxMessagesDetected: Int? // to use or not to use?
+    
+    var lastScrollTopPoint: CGFloat = 0
         
     // MARK: TableViewRelated
+    
+    func canScrollProgrammatically() -> Bool {
+        return messageItems.count > 0
+    }
+    
+    func lastRowIndex() -> Int {
+        return messageItems.count - 1
+    }
+    
     func numberOfRowsInSection() -> Int {
         return messageItems.count
     }
@@ -45,6 +56,24 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
         return messageItems[indexPath.row].sizes.cellHeight
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let topPoint = scrollView.contentOffset.y + scrollView.bounds.size.height
+        let scrollPointToLoadMoreContent = scrollView.contentSize.height
+        
+        // direction - up
+        if topPoint > lastScrollTopPoint {
+            //print("topPoint: \(topPoint), scrollPointToLoadMoreContent: \(scrollPointToLoadMoreContent)")
+            
+            if(topPoint >= scrollPointToLoadMoreContent){
+                //print("fetch more data")
+                getMessages()
+            }
+        }
+        lastScrollTopPoint = topPoint
+    }
+    
+    
+    
     func viewDidLoad() {
         tryToLoadMessages(messageOffset: 0)
     }
@@ -55,6 +84,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     
     private func tryToLoadMessages(messageOffset: Int){
         if !isFetchingContent {
+            print("LOADING MESSAGES")
             isFetchingContent = true
             view?.onFetchMessagesStarted(isInitialLoad: messageOffset == 0)
             interactor?.loadMessages(messageOffset: messageOffset)
@@ -103,7 +133,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         self.messageItems.append(contentsOf: messageItems)
         
         DispatchQueue.main.async { [weak self] in
-            self?.view?.onFetchMessagesCompleted()
+            self?.view?.onFetchMessagesCompleted(addedAnyNewMessages: messageItems.count > 0)
         }
         
         isFetchingContent = false

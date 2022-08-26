@@ -11,14 +11,6 @@ import UIKit
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
     var presenter: MessengerViewToPresenterProtocol?
     
-    var shrinkingFooterView: ShrinkingFooterView?
-//    var refreshControlParent: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .blue
-//        return view
-//    }()
-    
     var loadingView: LoadingView = {
         let loadingView = LoadingView()
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,25 +59,17 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         if isInitialLoad {
             loadingView.startLoading()
         } else {
-            shrinkingFooterView = ShrinkingFooterView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-            self.tableView.tableFooterView = shrinkingFooterView
-            
-            shrinkingFooterView?.setUp { [weak self] in
-                self?.shrinkingFooterView = nil
-                self?.tableView.tableFooterView = nil
-            }
-            //self.tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+            tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         }
     }
     
-    func onFetchMessagesCompleted() {
-        //self.tableView.tableFooterView = nil
+    func onFetchMessagesCompleted(addedAnyNewMessages: Bool) {
         loadingView.endLoading()
+        tableView.tableFooterView = nil
         
         tableView.reloadData()
-        
-        if let shrinkingFooterView = shrinkingFooterView {
-            shrinkingFooterView.shrink()
+        if(!addedAnyNewMessages){
+            scrollToTop()
         }
     }
     
@@ -95,6 +79,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         if ranOutOfAttempts {
             self.tableView.tableFooterView = nil
             loadingView.endLoading()
+            scrollToTop()
         }else {
             // error but continue loading, present something small like 'networking problems'
         }
@@ -114,16 +99,14 @@ extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
         return presenter?.tableViewCellHeight(at: indexPath) ?? 100
     }
     
-    // TODO move logic to presenter
-    // TODO check loading, sometimes works when not expected
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let topPoint = scrollView.contentOffset.y + scrollView.bounds.size.height
-        let scrollPointToLoadMoreContent = scrollView.contentSize.height
-        //print("topPoint: \(topPoint), scrollPointToLoadMoreContent: \(scrollPointToLoadMoreContent)")
-        
-        if(topPoint >= scrollPointToLoadMoreContent){
-            //print("fetch more data")
-            presenter?.getMessages()
+        presenter?.scrollViewDidScroll(scrollView: scrollView)
+    }
+    
+    private func scrollToTop() {
+        if let presenter = presenter, presenter.canScrollProgrammatically(){
+            let topRow = IndexPath(row: presenter.lastRowIndex(), section: 0)
+            self.tableView.scrollToRow(at: topRow, at: .top, animated: true)
         }
     }
 }

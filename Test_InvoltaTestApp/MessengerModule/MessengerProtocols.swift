@@ -15,9 +15,12 @@ protocol MessengerViewToPresenterProtocol: AnyObject {
     
     func viewDidLoad()
     
+    func canScrollProgrammatically() -> Bool
+    func lastRowIndex() -> Int
     func numberOfRowsInSection() -> Int
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell
     func tableViewCellHeight(at indexPath: IndexPath) -> CGFloat
+    func scrollViewDidScroll(scrollView: UIScrollView)
     
     func getMessages()
 }
@@ -26,7 +29,7 @@ protocol MessengerPresenterToViewProtocol: AnyObject {
     var presenter: MessengerViewToPresenterProtocol? { get set }
     
     func onFetchMessagesStarted(isInitialLoad: Bool)
-    func onFetchMessagesCompleted()
+    func onFetchMessagesCompleted(addedAnyNewMessages: Bool)
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool)
 }
 
