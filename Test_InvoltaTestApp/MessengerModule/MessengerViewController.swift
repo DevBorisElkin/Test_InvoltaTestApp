@@ -11,6 +11,7 @@ import UIKit
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
     var presenter: MessengerViewToPresenterProtocol?
     
+    var shrinkingFooterView: ShrinkingFooterView?
 //    var refreshControlParent: UIView = {
 //        let view = UIView()
 //        view.translatesAutoresizingMaskIntoConstraints = false
@@ -62,19 +63,37 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         
     }
     
-    func onFetchMessagesStarted() {
-        loadingView.startLoading()
+    func onFetchMessagesStarted(isInitialLoad: Bool) {
+        if isInitialLoad {
+            loadingView.startLoading()
+        } else {
+            shrinkingFooterView = ShrinkingFooterView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            self.tableView.tableFooterView = shrinkingFooterView
+            
+            shrinkingFooterView?.setUp { [weak self] in
+                self?.shrinkingFooterView = nil
+                self?.tableView.tableFooterView = nil
+            }
+            //self.tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        }
     }
     
     func onFetchMessagesCompleted() {
-        tableView.reloadData()
+        //self.tableView.tableFooterView = nil
         loadingView.endLoading()
+        
+        tableView.reloadData()
+        
+        if let shrinkingFooterView = shrinkingFooterView {
+            shrinkingFooterView.shrink()
+        }
     }
     
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool) {
         //print("Failed to fetch messages: \(error)")
         
         if ranOutOfAttempts {
+            self.tableView.tableFooterView = nil
             loadingView.endLoading()
         }else {
             // error but continue loading, present something small like 'networking problems'
@@ -105,46 +124,5 @@ extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
             //print("fetch more data")
             presenter?.getMessages()
         }
-        
-//        let bottomPoint: CGFloat = scrollView.contentOffset.y + scrollView.bounds.size.height
-//        let scrollPointToLoadMoreContent: CGFloat = scrollView.contentSize.height + CommentCellConstants.commentInsetToLoadMoreComments
-//
-//        if(bottomPoint > scrollPointToLoadMoreContent && table.tableFooterView == nil){
-//            print("fetch more data")
-//            presenter?.commentsPaginationRequest()
-//        }
-    }
-}
-
-extension MessengerViewController {
-    func loadingDataStarted(){
-//        if refreshView == nil {
-//            var spinnerHeader = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 100))
-//            refreshView = spinnerHeader
-//            refreshControlParent.addSubview(spinnerHeader)
-//            //spinnerHeader.frame.origin = CGPoint(x: refreshControlParent.frame.midX, y: refreshControlParent.frame.maxY)
-//            spinnerHeader.centerXAnchor.constraint(equalTo: refreshControlParent.centerXAnchor).isActive = true
-//            spinnerHeader.centerYAnchor.constraint(equalTo: refreshControlParent.centerYAnchor).isActive = true
-//        }
-        
-        
-        
-//        self.tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 100))
-    }
-    
-    func loadingDataEnded(){
-//        if let refreshView = refreshView {
-//            refreshView.removeFromSuperview()
-//            self.refreshView = nil
-//        }
-        
-        
-        
-        
-//        self.tableView.tableFooterView = nil
-//
-//        if let refreshControl = tableView.refreshControl, refreshControl.isRefreshing{
-//            refreshControl.endRefreshing()
-//        }
     }
 }

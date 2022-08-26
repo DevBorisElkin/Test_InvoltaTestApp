@@ -25,7 +25,7 @@ protocol MessengerViewToPresenterProtocol: AnyObject {
 protocol MessengerPresenterToViewProtocol: AnyObject {
     var presenter: MessengerViewToPresenterProtocol? { get set }
     
-    func onFetchMessagesStarted()
+    func onFetchMessagesStarted(isInitialLoad: Bool)
     func onFetchMessagesCompleted()
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool)
 }

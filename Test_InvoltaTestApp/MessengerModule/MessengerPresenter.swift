@@ -47,7 +47,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     private func tryToLoadMessages(messageOffset: Int){
         if !isFetchingContent {
             isFetchingContent = true
-            view?.onFetchMessagesStarted()
+            view?.onFetchMessagesStarted(isInitialLoad: messageOffset == 0)
             interactor?.loadMessages(messageOffset: messageOffset)
         }
     }

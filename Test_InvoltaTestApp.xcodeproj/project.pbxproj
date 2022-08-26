@@ -31,6 +31,7 @@
 		525EFA2828B91F02007E0311 /* MessageCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */; };
 		525EFA2A28B937F0007E0311 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2928B937F0007E0311 /* LoadingView.swift */; };
 		525EFA2C28B948B4007E0311 /* MessagesTableViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */; };
+		525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellLayoutCalculator.swift; sourceTree = "<group>"; };
 		525EFA2928B937F0007E0311 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewConstants.swift; sourceTree = "<group>"; };
+		525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkingFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				525EFA0A28B8F103007E0311 /* WebImageView.swift */,
 				525EFA2928B937F0007E0311 /* LoadingView.swift */,
+				525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				525EFA1628B8F8D4007E0311 /* MessengerRouter.swift in Sources */,
 				525EFA2C28B948B4007E0311 /* MessagesTableViewConstants.swift in Sources */,
 				525EFA0028B8F04E007E0311 /* Constraints.swift in Sources */,
+				525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */,
 				525EFA2A28B937F0007E0311 /* LoadingView.swift in Sources */,
 				525EFA2428B90C24007E0311 /* NetworkEntities.swift in Sources */,
 				525EF9EB28B8EE72007E0311 /* AppDelegate.swift in Sources */,
