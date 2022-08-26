@@ -9,12 +9,34 @@ import Foundation
 import UIKit
 
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
-    weak var presenter: MessengerViewToPresenterProtocol?
+    var presenter: MessengerViewToPresenterProtocol?
+    
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .red
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .brown
+        setUpUI()
+        presenter?.viewDidLoad()
+    }
+    
+    func setUpUI() {
+        view.addSubview(tableView)
+//        tableView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: VideoSearchConstants.tableViewInsets)
+        tableView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: AppConstants.safeAreaPadding.top, left: 0, bottom: AppConstants.safeAreaPadding.bottom, right: 0))
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(MessageViewTableViewCell.self, forCellReuseIdentifier: MessageViewTableViewCell.reuseId)
+        
+        tableView.reloadData()
     }
     
     func onFetchMessagesStarted() {
@@ -28,4 +50,21 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     func onFetchMessagesFail(error: Error) {
         
     }
+}
+
+extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("presenter == nil: \(presenter == nil)")
+        return presenter?.numberOfRowsInSection() ?? 0
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return presenter?.setCell(tableView: tableView, forRowAt: indexPath) ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return presenter?.tableViewCellHeight(at: indexPath) ?? 100
+    }
+    
 }

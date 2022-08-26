@@ -23,6 +23,8 @@
 		525EFA1428B8F8C5007E0311 /* MessengerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA1328B8F8C5007E0311 /* MessengerInteractor.swift */; };
 		525EFA1628B8F8D4007E0311 /* MessengerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA1528B8F8D4007E0311 /* MessengerRouter.swift */; };
 		525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA1828B8FA69007E0311 /* AppConstants.swift */; };
+		525EFA1C28B8FC35007E0311 /* MessageViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA1B28B8FC35007E0311 /* MessageViewTableViewCell.swift */; };
+		525EFA1E28B8FE5F007E0311 /* MessageCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA1D28B8FE5F007E0311 /* MessageCellConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		525EFA1328B8F8C5007E0311 /* MessengerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerInteractor.swift; sourceTree = "<group>"; };
 		525EFA1528B8F8D4007E0311 /* MessengerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerRouter.swift; sourceTree = "<group>"; };
 		525EFA1828B8FA69007E0311 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		525EFA1B28B8FC35007E0311 /* MessageViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewTableViewCell.swift; sourceTree = "<group>"; };
+		525EFA1D28B8FE5F007E0311 /* MessageCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +83,7 @@
 				525EFA0C28B8F170007E0311 /* MessengerModule */,
 				525EFA0928B8F0F8007E0311 /* CustomViews */,
 				525EF9FE28B8EF35007E0311 /* Helpers */,
-				525EFA1728B8FA5A007E0311 /* AppConstants */,
+				525EFA1728B8FA5A007E0311 /* Constants */,
 				525EF9EA28B8EE72007E0311 /* AppDelegate.swift */,
 				525EF9EC28B8EE72007E0311 /* SceneDelegate.swift */,
 				525EF9F328B8EE75007E0311 /* Assets.xcassets */,
@@ -117,16 +121,26 @@
 				525EFA1128B8F8BA007E0311 /* MessengerPresenter.swift */,
 				525EFA1328B8F8C5007E0311 /* MessengerInteractor.swift */,
 				525EFA1528B8F8D4007E0311 /* MessengerRouter.swift */,
+				525EFA1A28B8FB43007E0311 /* Views */,
 			);
 			path = MessengerModule;
 			sourceTree = "<group>";
 		};
-		525EFA1728B8FA5A007E0311 /* AppConstants */ = {
+		525EFA1728B8FA5A007E0311 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				525EFA1828B8FA69007E0311 /* AppConstants.swift */,
+				525EFA1D28B8FE5F007E0311 /* MessageCellConstants.swift */,
 			);
-			path = AppConstants;
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		525EFA1A28B8FB43007E0311 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				525EFA1B28B8FC35007E0311 /* MessageViewTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,12 +213,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525EFA1C28B8FC35007E0311 /* MessageViewTableViewCell.swift in Sources */,
 				525EFA1228B8F8BA007E0311 /* MessengerPresenter.swift in Sources */,
 				525EFA1028B8F8AA007E0311 /* MessengerViewController.swift in Sources */,
 				525EFA1628B8F8D4007E0311 /* MessengerRouter.swift in Sources */,
 				525EFA0028B8F04E007E0311 /* Constraints.swift in Sources */,
 				525EF9EB28B8EE72007E0311 /* AppDelegate.swift in Sources */,
 				525EFA0828B8F0C5007E0311 /* UIHelpers.swift in Sources */,
+				525EFA1E28B8FE5F007E0311 /* MessageCellConstants.swift in Sources */,
 				525EFA0228B8F06E007E0311 /* NetworkingHelpers.swift in Sources */,
 				525EFA0E28B8F262007E0311 /* MessengerProtocols.swift in Sources */,
 				525EFA0428B8F086007E0311 /* HttpResponses.swift in Sources */,

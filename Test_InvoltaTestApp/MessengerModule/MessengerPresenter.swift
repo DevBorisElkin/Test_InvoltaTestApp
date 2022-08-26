@@ -10,23 +10,27 @@ import UIKit
 
 class MessengerPresenter: MessengerViewToPresenterProtocol {
     weak var view: MessengerPresenterToViewProtocol?
-    weak var interactor: MessengerPresenterToInteractorProtocol?
-    weak var router: MessengerPresenterToRouterProtocol?
+    var interactor: MessengerPresenterToInteractorProtocol?
+    var router: MessengerPresenterToRouterProtocol?
+    
+    var data = ["One", "Two", "Thee", "Four", "One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four"]
     
     func viewDidLoad() {
         
     }
     
     func numberOfRowsInSection() -> Int {
-        
+        return data.count
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: MessageViewTableViewCell.reuseId, for: indexPath) as! MessageViewTableViewCell
+        cell.setUp(someText: data[indexPath.row])
+        return cell
     }
     
     func tableViewCellHeight(at indexPath: IndexPath) -> CGFloat {
-        
+        return 150
     }
     
     func getMessages() {
