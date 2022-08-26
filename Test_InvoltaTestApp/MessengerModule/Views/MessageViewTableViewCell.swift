@@ -74,12 +74,14 @@ class MessageViewTableViewCell: UITableViewCell {
         cardView.addSubview(messageTextLabel)
     }
     
-    func setUp(someText: String){
+    func setUp(viewModel: MessageItemViewModel){
+        print("received image url: \(viewModel.authorRandomImageUrl)")
         messageAuthorIconImage.frame = CGRect(x: 5, y: 5, width: 50, height: 50)
+        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
         messageAuthorLabel.frame = CGRect(x: 60, y: 5, width: 200, height: 50)
-        messageAuthorLabel.text = "Some Author"
+        messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.frame = CGRect(x: 60, y: 60, width: 200, height: 50)
-        messageTextLabel.text = someText
+        messageTextLabel.text = viewModel.message
         
         
         

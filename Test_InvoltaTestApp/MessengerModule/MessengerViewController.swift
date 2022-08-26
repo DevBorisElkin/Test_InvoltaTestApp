@@ -36,7 +36,9 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         tableView.dataSource = self
         tableView.register(MessageViewTableViewCell.self, forCellReuseIdentifier: MessageViewTableViewCell.reuseId)
         
-        tableView.reloadData()
+        tableView.transform = CGAffineTransform (scaleX: 1,y: -1)
+        
+        
     }
     
     func onFetchMessagesStarted() {
@@ -44,17 +46,16 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     func onFetchMessagesCompleted() {
-        
+        tableView.reloadData()
     }
     
     func onFetchMessagesFail(error: Error) {
-        
+        print("Failed to fetch messages: \(error)")
     }
 }
 
 extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("presenter == nil: \(presenter == nil)")
         return presenter?.numberOfRowsInSection() ?? 0
     }
     

@@ -33,12 +33,12 @@ protocol MessengerPresenterToViewProtocol: AnyObject {
 protocol MessengerPresenterToInteractorProtocol: AnyObject {
     var presenter: MessengerInteractorToPresenterProtocol? { get set }
     
-    func loadMessages()
+    func loadMessages(messageOffset: Int)
 }
 
 protocol MessengerInteractorToPresenterProtocol: AnyObject {
-    func receivedMessages()
-    func onMessagesLoadingFailed()
+    func receivedMessages(messagesData: MessagesWrapped)
+    func onMessagesLoadingFailed(error: Error)
 }
 
 typealias EntryPoint = MessengerPresenterToViewProtocol & UIViewController

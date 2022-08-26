@@ -13,19 +13,23 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var interactor: MessengerPresenterToInteractorProtocol?
     var router: MessengerPresenterToRouterProtocol?
     
-    var data = ["One", "Two", "Thee", "Four", "One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four","One", "Two", "Thee", "Four"]
+    var messageItems: [MessageItemViewModel] = []
     
     func viewDidLoad() {
-        
+        interactor?.loadMessages(messageOffset: 0)
     }
     
     func numberOfRowsInSection() -> Int {
-        return data.count
+        return messageItems.count
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MessageViewTableViewCell.reuseId, for: indexPath) as! MessageViewTableViewCell
-        cell.setUp(someText: data[indexPath.row])
+        
+        //cell.contentView.transform = CGAffineTransform (scaleX: 1,y: -1);
+        cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+        
+        cell.setUp(viewModel: messageItems[indexPath.row])
         return cell
     }
     
@@ -41,13 +45,25 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
 }
 
 extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
-    func receivedMessages() {
+    func receivedMessages(messagesData: MessagesWrapped) {
+        
+        var messageItems = [MessageItemViewModel]()
+        
+        for i in 0 ..< messagesData.result.count {
+            let messageItem = MessageItemViewModel(authorRandomName: "Bob",
+                                          authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),
+                                          message: messagesData.result[i])
+            messageItems.append(messageItem)
+        }
+        self.messageItems = messageItems
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.onFetchMessagesCompleted()
+        }
         
     }
     
-    func onMessagesLoadingFailed() {
-        
+    func onMessagesLoadingFailed(error: Error) {
+        view?.onFetchMessagesFail(error: error)
     }
-    
-    
 }
