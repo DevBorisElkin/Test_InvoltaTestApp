@@ -19,6 +19,8 @@ struct MessageItemViewModel {
         var needToAnimate: Bool = true
         var delayBeforeAnimation: Double = 0
         var animationTime: Double = MessageCellConstants.cellOpeningAnimationDuration
+        var cardViewInitialScale: CGAffineTransform = MessageCellConstants.cellInitialScale
+        var animationOptions: UIView.AnimationOptions =  MessageCellConstants.animationOptions
     }
     
     struct Sizes {

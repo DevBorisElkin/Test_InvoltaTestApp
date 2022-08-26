@@ -23,13 +23,13 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("Present cell at: \(indexPath.row)")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: MessageViewTableViewCell.reuseId, for: indexPath) as! MessageViewTableViewCell
         
-        //cell.contentView.transform = CGAffineTransform (scaleX: 1,y: -1);
+        // reverse for table view
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         
-        // check time delay
+        // check appear time delay
         var timeDelay: Double = 0
         if(messageItems[indexPath.row].animationData.needToAnimate){
             timeDelay = calculateTimeDelayBeforeAnimation()

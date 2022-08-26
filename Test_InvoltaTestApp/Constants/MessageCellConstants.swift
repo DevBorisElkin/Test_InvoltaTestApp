@@ -28,8 +28,9 @@ class MessageCellConstants {
     static let messageTextInsets = UIEdgeInsets(top: 4, left: 8, bottom: 8, right: 8)
     
     // MARK: Card View animation related
-    static let cellOpeningAnimationDuration: Double = 0.5
-    static let cellOpeningAnimationInterval: Double = 0.1
-    static let cellInitialScale: Double = 1.5
+    static let cellOpeningAnimationDuration: Double = 0.6
+    static let cellOpeningAnimationInterval: Double = 0.08
+    static let cellInitialScale = CGAffineTransform(scaleX: 0.1, y: 0.1)
     static let cellTargetScale: Double = 1.0
+    static let animationOptions: UIView.AnimationOptions = .curveEaseInOut
 }
