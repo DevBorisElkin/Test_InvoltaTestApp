@@ -30,7 +30,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     func setUpUI() {
         view.addSubview(tableView)
 //        tableView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: VideoSearchConstants.tableViewInsets)
-        tableView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: AppConstants.safeAreaPadding.top, left: 0, bottom: AppConstants.safeAreaPadding.bottom, right: 0))
+        tableView.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: AppConstants.safeAreaPadding.bottom, right: 0))
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -50,7 +50,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     func onFetchMessagesFail(error: Error) {
-        print("Failed to fetch messages: \(error)")
+        //print("Failed to fetch messages: \(error)")
     }
 }
 

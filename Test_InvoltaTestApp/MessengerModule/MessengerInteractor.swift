@@ -16,23 +16,33 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
         
         Task.detached(priority: .medium) { [weak self] in
             
-            // MARK: LOAD MESSAGES
-            let messagesData: MessagesWrapped?
-            let resultVideosData: Result<MessagesWrapped, Error>  = await NetworkingHelpers.loadDataFromUrlString(from: requestUrlString, printJsonAndRequestString: false)
+            var currentFailedRequests = 0
+            var messagesData: MessagesWrapped?
+            var resultVideosData: Result<MessagesWrapped, Error>!
             
-            switch resultVideosData {
-            case .success(let data):
-                messagesData = data
-            case .failure(let error):
-                print(error)
-                self?.presenter?.onMessagesLoadingFailed(error: error)
-                return
+            while(messagesData == nil && currentFailedRequests < AppConstants.consecutiveNetworkAttempts) {
+                // MARK: LOAD MESSAGES
+                
+                resultVideosData = await NetworkingHelpers.loadDataFromUrlString(from: requestUrlString, printJsonAndRequestString: false)
+                
+                switch resultVideosData {
+                case .success(let data):
+                    messagesData = data
+                case .failure(let error):
+                    currentFailedRequests += 1
+                    print("failed at request, currentFailedRequests: \(currentFailedRequests)")
+                    self?.presenter?.onMessagesLoadingFailed(error: error)
+                case .none:
+                    break
+                }
             }
+            
             guard let messagesData = messagesData else {
-                print("search failed");
+                print("currentFailedRequests: \(currentFailedRequests)\nsearch failed for undefined reason")
                 self?.presenter?.onMessagesLoadingFailed(error: NetworkingHelpers.NetworkRequestError.undefined)
                 return }
             
+            print("Network request succeeded from attempt: \(currentFailedRequests)")
             self?.presenter?.receivedMessages(messagesData: messagesData)
         }
     }

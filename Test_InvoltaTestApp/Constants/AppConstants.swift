@@ -16,6 +16,8 @@ class AppConstants {
         safeAreaPadding = window.safeAreaInsets
     }
     
+    static let consecutiveNetworkAttempts = 5
+    
     // to see loading spinners and etc.
     static let messagesRequestArtificialDelay: Double = 0.6
     
