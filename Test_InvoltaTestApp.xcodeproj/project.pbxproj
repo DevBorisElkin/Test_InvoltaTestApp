@@ -19,6 +19,7 @@
 		525EFA0628B8F0A9007E0311 /* TextHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA0528B8F0A9007E0311 /* TextHeight.swift */; };
 		525EFA0828B8F0C5007E0311 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA0728B8F0C4007E0311 /* UIHelpers.swift */; };
 		525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA0A28B8F103007E0311 /* WebImageView.swift */; };
+		525EFA0E28B8F262007E0311 /* MessengerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA0D28B8F262007E0311 /* MessengerProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		525EFA0528B8F0A9007E0311 /* TextHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHeight.swift; sourceTree = "<group>"; };
 		525EFA0728B8F0C4007E0311 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		525EFA0A28B8F103007E0311 /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
+		525EFA0D28B8F262007E0311 /* MessengerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		525EF9E928B8EE72007E0311 /* Test_InvoltaTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				525EFA0C28B8F170007E0311 /* MessengerModule */,
 				525EFA0928B8F0F8007E0311 /* CustomViews */,
 				525EF9FE28B8EF35007E0311 /* Helpers */,
 				525EF9EA28B8EE72007E0311 /* AppDelegate.swift */,
@@ -99,6 +102,14 @@
 				525EFA0A28B8F103007E0311 /* WebImageView.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		525EFA0C28B8F170007E0311 /* MessengerModule */ = {
+			isa = PBXGroup;
+			children = (
+				525EFA0D28B8F262007E0311 /* MessengerProtocols.swift */,
+			);
+			path = MessengerModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 				525EF9EB28B8EE72007E0311 /* AppDelegate.swift in Sources */,
 				525EFA0828B8F0C5007E0311 /* UIHelpers.swift in Sources */,
 				525EFA0228B8F06E007E0311 /* NetworkingHelpers.swift in Sources */,
+				525EFA0E28B8F262007E0311 /* MessengerProtocols.swift in Sources */,
 				525EFA0428B8F086007E0311 /* HttpResponses.swift in Sources */,
 				525EFA0628B8F0A9007E0311 /* TextHeight.swift in Sources */,
 				525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */,
