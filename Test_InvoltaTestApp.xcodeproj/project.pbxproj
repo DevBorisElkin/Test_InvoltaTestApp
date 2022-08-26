@@ -28,6 +28,7 @@
 		525EFA2128B90AF2007E0311 /* NetworkRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2028B90AF2007E0311 /* NetworkRequestBuilder.swift */; };
 		525EFA2428B90C24007E0311 /* NetworkEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2328B90C24007E0311 /* NetworkEntities.swift */; };
 		525EFA2628B90C2C007E0311 /* PreparedEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2528B90C2C007E0311 /* PreparedEntities.swift */; };
+		525EFA2828B91F02007E0311 /* MessageCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		525EFA2028B90AF2007E0311 /* NetworkRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilder.swift; sourceTree = "<group>"; };
 		525EFA2328B90C24007E0311 /* NetworkEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEntities.swift; sourceTree = "<group>"; };
 		525EFA2528B90C2C007E0311 /* PreparedEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedEntities.swift; sourceTree = "<group>"; };
+		525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellLayoutCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		525EFA1F28B90AA9007E0311 /* LayoutCalculators */ = {
 			isa = PBXGroup;
 			children = (
+				525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */,
 			);
 			path = LayoutCalculators;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				525EFA0428B8F086007E0311 /* HttpResponses.swift in Sources */,
 				525EFA1428B8F8C5007E0311 /* MessengerInteractor.swift in Sources */,
 				525EFA0628B8F0A9007E0311 /* TextHeight.swift in Sources */,
+				525EFA2828B91F02007E0311 /* MessageCellLayoutCalculator.swift in Sources */,
 				525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */,
 				525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */,
 				525EF9ED28B8EE72007E0311 /* SceneDelegate.swift in Sources */,

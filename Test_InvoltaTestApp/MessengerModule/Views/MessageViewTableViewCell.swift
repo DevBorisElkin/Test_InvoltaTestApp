@@ -20,8 +20,9 @@ class MessageViewTableViewCell: UITableViewCell {
     
     lazy var messageAuthorIconImage: WebImageView = {
         let imageView = WebImageView()
+        imageView.checkForAbsoluteUrl = false
         imageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        imageView.layer.cornerRadius = MessageCellConstants.messageAuthorIconSize / 2
+        imageView.layer.cornerRadius = MessageCellConstants.messageAuthorIconSize.width / 2
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -59,8 +60,7 @@ class MessageViewTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        //videoThumbnailImageView.set(imageURL: nil)
-        //channelIconImage.set(imageURL: nil)
+        messageAuthorIconImage.set(imageURL: nil)
     }
     
     func setUpConstraints(){
@@ -75,15 +75,15 @@ class MessageViewTableViewCell: UITableViewCell {
     }
     
     func setUp(viewModel: MessageItemViewModel){
-        print("received image url: \(viewModel.authorRandomImageUrl)")
-        messageAuthorIconImage.frame = CGRect(x: 5, y: 5, width: 50, height: 50)
-        //messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
-        messageAuthorIconImage.setImage(imageUrlString: viewModel.authorRandomImageUrl)
-        messageAuthorLabel.frame = CGRect(x: 60, y: 5, width: 200, height: 50)
+        //messageAuthorIconImage.frame = CGRect(x: 5, y: 5, width: 50, height: 50)
+        messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
+        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        //messageAuthorLabel.frame = CGRect(x: 60, y: 5, width: 200, height: 50)
+        messageAuthorLabel.frame = viewModel.sizes.authorNameFame
         messageAuthorLabel.text = viewModel.authorRandomName
-        messageTextLabel.frame = CGRect(x: 60, y: 60, width: 200, height: 50)
+        //messageTextLabel.frame = CGRect(x: 60, y: 60, width: 200, height: 50)
+        messageTextLabel.frame = viewModel.sizes.messageTextFrame
         messageTextLabel.text = viewModel.message
-        
         
         
     }

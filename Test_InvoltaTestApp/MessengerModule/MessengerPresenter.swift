@@ -34,7 +34,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     }
     
     func tableViewCellHeight(at indexPath: IndexPath) -> CGFloat {
-        return 150
+        return messageItems[indexPath.row].sizes.cellHeight
     }
     
     func getMessages() {
@@ -50,9 +50,15 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         var messageItems = [MessageItemViewModel]()
         
         for i in 0 ..< messagesData.result.count {
-            let messageItem = MessageItemViewModel(authorRandomName: "Bob",
-                                          authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i) /*"https://picsum.photos/300/300"*/,
-                                          message: messagesData.result[i])
+            
+            let authorName = "Bob bb"
+            let messageText = messagesData.result[i]
+            
+            let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: messageText)
+            
+            let messageItem = MessageItemViewModel(authorRandomName: authorName,
+                                          authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),
+                                                   message: messageText, sizes: sizes)
             messageItems.append(messageItem)
         }
         self.messageItems = messageItems

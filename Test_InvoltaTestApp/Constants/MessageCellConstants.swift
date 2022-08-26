@@ -11,6 +11,7 @@ import UIKit
 class MessageCellConstants {
     // MARK: Fonts
     static let messageAuthorFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+    static let messageAuthorLimitLines: CGFloat = 2
     static let messageTextFont = UIFont.systemFont(ofSize: 13, weight: .regular)
     
     // MARK: Colors
@@ -20,9 +21,9 @@ class MessageCellConstants {
     // MARK: Sizes and insets
     static let cardViewOffset = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
     
-    static let messageAuthorIconSize: CGFloat = 45
+    static let messageAuthorIconSize = CGSize(width: 45, height: 45)
     static let messageAuthorIconInsets = UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     
     static let messageAuthorInsets = UIEdgeInsets(top: 8, left: 8, bottom: 5, right: 8)
-    static let messageTextInsets = UIEdgeInsets(top: 4, left: 8, bottom: 22, right: 8)
+    static let messageTextInsets = UIEdgeInsets(top: 4, left: 8, bottom: 8, right: 8)
 }
