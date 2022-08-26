@@ -13,7 +13,8 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var interactor: MessengerPresenterToInteractorProtocol?
     var router: MessengerPresenterToRouterProtocol?
     
-    var messageItems: [MessageItemViewModel] = []
+    
+    var messageItems: [MessageItem] = []
     var isFetchingContent = false
     var maxMessagesDetected: Int? // to use or not to use?
         
@@ -23,17 +24,19 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("Present cell at: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: MessageViewTableViewCell.reuseId, for: indexPath) as! MessageViewTableViewCell
         
         //cell.contentView.transform = CGAffineTransform (scaleX: 1,y: -1);
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         
-        cell.setUp(viewModel: messageItems[indexPath.row])
+        cell.setUp(viewModel: messageItems[indexPath.row].messageData, openingAnimation: messageItems[indexPath.row].shouldAnimate)
+        messageItems[indexPath.row].shouldAnimate = false
         return cell
     }
     
     func tableViewCellHeight(at indexPath: IndexPath) -> CGFloat {
-        return messageItems[indexPath.row].sizes.cellHeight
+        return messageItems[indexPath.row].messageData.sizes.cellHeight
     }
     
     func viewDidLoad() {
@@ -56,7 +59,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
 extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
     func receivedMessages(messagesData: MessagesWrapped) {
         
-        var messageItems = [MessageItemViewModel]()
+        var messageItems = [MessageItem]()
         
         for i in 0 ..< messagesData.result.count {
             
@@ -68,7 +71,8 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
             let messageItem = MessageItemViewModel(authorRandomName: authorName,
                                           authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),
                                                    message: messageText, sizes: sizes)
-            messageItems.append(messageItem)
+            
+            messageItems.append((messageItem, true))
         }
         self.messageItems.append(contentsOf: messageItems)
         

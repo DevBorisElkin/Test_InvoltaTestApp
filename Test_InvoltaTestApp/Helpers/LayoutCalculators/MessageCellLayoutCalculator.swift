@@ -53,7 +53,15 @@ class MessageCellLayoutCalculator {
         
         let finalCellHeight = max(minCellHeight, cellHeight)
         
-        return MessageItemViewModel.Sizes(authorImageFrame: authorImageFrame,
+        // MARK: Calculate Card View frame
+        let cardViewHeight: CGFloat = finalCellHeight - MessageCellConstants.cardViewOffset.top - MessageCellConstants.cardViewOffset.bottom
+        let cardViewFrame = CGRect(x: MessageCellConstants.cardViewOffset.left, y: MessageCellConstants.cardViewOffset.top, width: cardViewWidth, height: cardViewHeight)
+        
+        let cardViewInitialPoint = CGPoint(x: -cardViewWidth, y: cardViewFrame.minY)
+        
+        return MessageItemViewModel.Sizes(cardViewInitialPoint: cardViewInitialPoint,
+                                          cardViewFrame: cardViewFrame,
+                                          authorImageFrame: authorImageFrame,
                                           authorNameFame: authorNameFame,
                                           messageTextFrame: messageTextFrame,
                                           cellHeight: finalCellHeight)

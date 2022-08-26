@@ -13,7 +13,7 @@ class MessageViewTableViewCell: UITableViewCell {
     
     lazy var cardView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        //view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return view
     }()
@@ -66,7 +66,7 @@ class MessageViewTableViewCell: UITableViewCell {
     func setUpConstraints(){
         // MARK: cardView
         addSubview(cardView)
-        cardView.fillSuperview(padding: MessageCellConstants.cardViewOffset)
+        //cardView.fillSuperview(padding: MessageCellConstants.cardViewOffset)
         
         // MARK: subviews of card view
         cardView.addSubview(messageAuthorIconImage)
@@ -74,8 +74,8 @@ class MessageViewTableViewCell: UITableViewCell {
         cardView.addSubview(messageTextLabel)
     }
     
-    func setUp(viewModel: MessageItemViewModel){
-        //messageAuthorIconImage.frame = CGRect(x: 5, y: 5, width: 50, height: 50)
+    func setUp(viewModel: MessageItemViewModel, openingAnimation: Bool){
+        //messageAuthorIconImage.frame = CGRect(x: -15, y: 5, width: 50, height: 50)
         messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
         messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
         //messageAuthorLabel.frame = CGRect(x: 60, y: 5, width: 200, height: 50)
@@ -85,6 +85,24 @@ class MessageViewTableViewCell: UITableViewCell {
         messageTextLabel.frame = viewModel.sizes.messageTextFrame
         messageTextLabel.text = viewModel.message
         
+        if(openingAnimation){
+            cardView.frame.size = viewModel.sizes.cardViewFrame.size
+            cardView.frame.origin = viewModel.sizes.cardViewInitialPoint
+            
+            UIView.animate(withDuration: 2) { [weak self] in
+                //self?.frame.origin = viewModel.sizes.cardViewFrame.origin // cool actually
+                self?.cardView.frame.origin = viewModel.sizes.cardViewFrame.origin
+            }
+        }else{
+            cardView.frame = viewModel.sizes.cardViewFrame
+        }
         
+        
+        
+//        UIView.animate(withDuration: 2) { [weak self] in
+//            //self?.frame.origin = viewModel.sizes.cardViewFrame.origin // cool actually
+//            self?.cardView.frame.origin = viewModel.sizes.cardViewFrame.origin
+//        }
+//        cardView.frame.origin = CGPoint(x: cardView.frame.origin.x - 20, y: cardView.frame.origin.y)
     }
 }

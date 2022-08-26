@@ -115,6 +115,7 @@ extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     // TODO move logic to presenter
+    // TODO check loading, sometimes works when not expected
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let topPoint = scrollView.contentOffset.y + scrollView.bounds.size.height
         let scrollPointToLoadMoreContent = scrollView.contentSize.height
