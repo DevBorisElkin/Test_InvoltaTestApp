@@ -81,7 +81,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
 
             tableView.frame = GeneralUIConstants.calculateTableViewRectWithKeyboard(keyboardHeight: keyboardHeight)
             
-            keyboardView.frame = GeneralUIConstants.calculateKeyboardFrameWithKeyboard(keyboardHeight: keyboardHeight)
+            keyboardView.frame = GeneralUIConstants.calculateKeyboardParentFrameWithKeyboard(keyboardHeight: keyboardHeight)
         }
      }
     

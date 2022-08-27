@@ -38,9 +38,11 @@ class GeneralUIConstants {
     }
     
     // keyboard general insets
-    static var keyboardParentHeight: CGFloat { return AppConstants.safeAreaPadding.bottom + GeneralUIConstants.keyboardInsets.top + GeneralUIConstants.keyboardInsets.bottom + GeneralUIConstants.keyboardHeightAboveSafeArea }
+    static var keyboardFieldHeight: CGFloat { GeneralUIConstants.keyboardInsets.top + GeneralUIConstants.keyboardInsets.bottom + GeneralUIConstants.keyboardHeightAboveSafeArea }
+    static var keyboardParentHeight: CGFloat { return AppConstants.safeAreaPadding.bottom + keyboardFieldHeight }
+    
     static var keyboardFrame: CGRect { CGRect(origin: CGPoint(x: 0, y: AppConstants.screenHeight - keyboardParentHeight), size: CGSize(width: AppConstants.screenWidth, height: keyboardParentHeight)) }
-    static func calculateKeyboardFrameWithKeyboard(keyboardHeight: CGFloat) -> CGRect {
+    static func calculateKeyboardParentFrameWithKeyboard(keyboardHeight: CGFloat) -> CGRect {
         let rect = keyboardFrame
         return CGRect(origin: CGPoint(x: 0, y: rect.minY - keyboardHeight + AppConstants.safeAreaPadding.bottom), size: rect.size)
     }
