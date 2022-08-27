@@ -99,7 +99,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
             let authorName = "Bob bb"
             let messageText = messagesData.result[i]
             
-            let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: messageText)
+            let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: messageText, messageBelongsToCurrentUser: false)
             
             let messageItem = MessageItemViewModel(authorRandomName: authorName,
                                           authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),

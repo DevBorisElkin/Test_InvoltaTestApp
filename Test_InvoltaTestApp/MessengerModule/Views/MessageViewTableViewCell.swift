@@ -20,6 +20,21 @@ class MessageViewTableViewCell: UITableViewCell {
     lazy var cardView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.layer.cornerRadius = 17
+        return view
+    }()
+    
+    lazy var shadowView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        //view.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+        view.layer.cornerRadius = 17
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 2, height: 1)
+        view.layer.shadowRadius = 10
         return view
     }()
     
@@ -71,6 +86,9 @@ class MessageViewTableViewCell: UITableViewCell {
         // MARK: sliding view and cardView
         addSubview(slidingView)
         slidingView.addSubview(cardView)
+        
+        cardView.addSubview(shadowView)
+        shadowView.fillSuperview()
         
         // MARK: subviews of card view
         cardView.addSubview(messageAuthorIconImage)

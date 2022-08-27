@@ -24,14 +24,14 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
-        tableView.backgroundColor = .red
+        tableView.separatorStyle = .none
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .brown
+        view.backgroundColor = #colorLiteral(red: 0.6736666451, green: 0.8496916506, blue: 0.9686274529, alpha: 1)
         setUpUI()
         presenter?.viewDidLoad()
     }
@@ -56,11 +56,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     func onFetchMessagesStarted(isInitialLoad: Bool) {
-        if isInitialLoad {
-            loadingView.startLoading()
-        } else {
-            tableView.tableFooterView = UIHelpers.createSpinnerFooterWithConstraints(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        }
+        tableView.tableFooterView = UIHelpers.createSpinnerFooterWithBackground(height: 50, innerRectSize: CGSize(width: 30, height: 30))
     }
     
     func onFetchMessagesCompleted(addedAnyNewMessages: Bool) {

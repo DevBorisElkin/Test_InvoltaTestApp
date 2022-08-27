@@ -16,13 +16,37 @@ class UIHelpers{
     
     public static func createSpinnerFooterWithConstraints(frame: CGRect) -> UIView{
         let footerView = UIView(frame: frame)
-        footerView.backgroundColor = .brown
         
         let spinner = UIActivityIndicatorView()
         spinner.translatesAutoresizingMaskIntoConstraints = false
         footerView.addSubview(spinner)
         spinner.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+        
+        spinner.startAnimating()
+        return footerView
+    }
+    
+    public static func createSpinnerFooterWithBackground(height: CGFloat, innerRectSize: CGSize) -> UIView{
+        let footerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: height)))
+        
+        let cardView = UIView()
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.addSubview(cardView)
+        cardView.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
+        cardView.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+        cardView.widthAnchor.constraint(equalToConstant: innerRectSize.width).isActive = true
+        cardView.heightAnchor.constraint(equalToConstant: innerRectSize.height).isActive = true
+        
+        cardView.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.2235294118, blue: 0.2705882353, alpha: 1)
+        cardView.layer.cornerRadius = 5
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.transform = CGAffineTransform(scaleX: 1, y: -1)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        cardView.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: cardView.centerYAnchor).isActive = true
         
         spinner.startAnimating()
         return footerView
