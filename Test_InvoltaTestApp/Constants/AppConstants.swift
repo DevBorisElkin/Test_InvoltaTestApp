@@ -25,5 +25,11 @@ class AppConstants {
 }
 
 class GeneralUIConstants {
+    // title view
     static let titleViewHeightAboveSafeArea: CGFloat = 30
+    
+    // keyboard general insets
+    static var keyboardParentHeight: CGFloat { return AppConstants.safeAreaPadding.bottom + GeneralUIConstants.keyboardInsets.top + GeneralUIConstants.keyboardInsets.bottom + GeneralUIConstants.keyboardHeightAboveSafeArea }
+    static let keyboardInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    static let keyboardHeightAboveSafeArea: CGFloat = 34
 }

@@ -12,6 +12,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     var presenter: MessengerPresenterProtocols?
     
     var titleView = TitleView()
+    var keyboardView = KeyboardView()
     
     var loadingView: LoadingView = {
         let loadingView = LoadingView()
@@ -35,6 +36,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         
         view.backgroundColor = #colorLiteral(red: 0.6736666451, green: 0.8496916506, blue: 0.9686274529, alpha: 1)
         setNavigationBar()
+        setKeyboard()
         setUpUI()
         presenter?.viewDidLoad()
     }
@@ -51,6 +53,14 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         //titleView.fillSuperview()
     }
     
+    func setKeyboard() {
+        view.addSubview(keyboardView)
+        keyboardView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.keyboardParentHeight).isActive = true
+        keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
     func setUpUI() {
         
         view.addSubview(tableView)
@@ -61,15 +71,16 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         loadingView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         loadingView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        tableView.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: AppConstants.safeAreaPadding.bottom, right: 0))
+        tableView.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: keyboardView.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MessageViewTableViewCell.self, forCellReuseIdentifier: MessageViewTableViewCell.reuseId)
         
         tableView.transform = CGAffineTransform (scaleX: 1,y: -1)
-        
     }
+    
+    
     
     
     

@@ -33,6 +33,7 @@
 		525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */; };
 		525EFA3028B96A3E007E0311 /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */; };
 		525EFA3628BA42E3007E0311 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA3528BA42E3007E0311 /* TitleView.swift */; };
+		525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA3728BA53D5007E0311 /* KeyboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkingFooterView.swift; sourceTree = "<group>"; };
 		525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
 		525EFA3528BA42E3007E0311 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		525EFA3728BA53D5007E0311 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				525EFA2928B937F0007E0311 /* LoadingView.swift */,
 				525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */,
 				525EFA3528BA42E3007E0311 /* TitleView.swift */,
+				525EFA3728BA53D5007E0311 /* KeyboardView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */,
 				525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */,
 				525EF9ED28B8EE72007E0311 /* SceneDelegate.swift in Sources */,
+				525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */,
 				525EFA2128B90AF2007E0311 /* NetworkRequestBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
