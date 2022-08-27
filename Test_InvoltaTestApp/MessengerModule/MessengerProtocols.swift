@@ -36,17 +36,22 @@ protocol MessengerPresenterToViewProtocol: AnyObject {
     func onFetchMessagesCompleted(addedAnyNewMessages: Bool)
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool)
     func onLocalMessageSent()
+    func updateMessagesTable()
 }
 
 protocol MessengerPresenterToInteractorProtocol: AnyObject {
     var presenter: MessengerInteractorToPresenterProtocol? { get set }
     
     func loadMessages(messageOffset: Int)
+    func loadLocalMessages()
+    func saveLocalMessage(messageEntity: CoreDataMessageEntityToSave)
 }
 
 protocol MessengerInteractorToPresenterProtocol: AnyObject {
     func receivedMessages(messagesData: MessagesWrapped)
     func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool)
+    func receivedLocalMessages(localMessages: [MessageDataItem])
+    func localMessageSaved(localMessage: MessageDataItem)
 }
 
 typealias EntryPoint = MessengerPresenterToViewProtocol & UIViewController

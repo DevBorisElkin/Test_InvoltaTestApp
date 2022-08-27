@@ -11,6 +11,8 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
     
     weak var presenter: MessengerInteractorToPresenterProtocol?
     
+    var coreDataManager = CoreDataManager()
+    
     func loadMessages(messageOffset: Int) {
         let requestUrlString = NetworkRequestBuilder.createRequestUrlString(offset: messageOffset)
         
@@ -49,6 +51,19 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
             
             //print("Network request succeeded from attempt: \(currentFailedRequests)")
             self?.presenter?.receivedMessages(messagesData: messagesData)
+        }
+    }
+    
+    func loadLocalMessages() {
+        var items = coreDataManager.getMessageDataItems()
+        presenter?.receivedLocalMessages(localMessages: items)
+    }
+    
+    func saveLocalMessage(messageEntity: CoreDataMessageEntityToSave) {
+        if let messageDataItem =  coreDataManager.addMessage(message: messageEntity.message, author: messageEntity.author) {
+            presenter?.localMessageSaved(localMessage: messageDataItem)
+        }else{
+            print("Error saving message to database")
         }
     }
 }

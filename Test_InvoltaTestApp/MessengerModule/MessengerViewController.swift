@@ -148,6 +148,10 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     func onLocalMessageSent() {
         tableView.reloadData()
     }
+    
+    func updateMessagesTable(){
+        tableView.reloadData()
+    }
 }
 
 // MARK: Table view protocols

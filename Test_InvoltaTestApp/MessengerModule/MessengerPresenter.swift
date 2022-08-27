@@ -18,13 +18,15 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     var maxMessagesDetected: Int? // to use or not to use?
     
     var lastScrollTopPoint: CGFloat = 0
+    var lastLoadedItemOffset = 0
     
     func viewDidLoad() {
+        interactor?.loadLocalMessages()
         tryToLoadMessages(messageOffset: 0)
     }
     
     func getMessages() {
-        tryToLoadMessages(messageOffset: messageItems.count)
+        tryToLoadMessages(messageOffset: lastLoadedItemOffset)
     }
     
     private func tryToLoadMessages(messageOffset: Int){
@@ -37,13 +39,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     }
     
     func userSentMessage(message: String) {
-        insertLatestUserMessage(message: message)
-    }
-    
-    private func insertLatestUserMessage(message: String){
-        var messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true)
-        messageItems.insert(messageViewModel, at: 0)
-        view?.onLocalMessageSent()
+        interactor?.saveLocalMessage(messageEntity: CoreDataMessageEntityToSave(author: AppConstants.currentUserNickname, message: message))
     }
 }
 
@@ -114,6 +110,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
             
             messageItems.append(messageItem)
         }
+        lastLoadedItemOffset += messageItems.count
         self.messageItems.append(contentsOf: messageItems)
         
         DispatchQueue.main.async { [weak self] in
@@ -121,6 +118,40 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         }
         
         isFetchingContent = false
+    }
+    
+    func receivedLocalMessages(localMessages: [MessageDataItem]) {
+        var messageItems = [MessageItemViewModel]()
+        
+        for i in 0 ..< localMessages.count {
+            
+            guard let authorName = localMessages[i].author, let messageText = localMessages[i].message else{
+                print("Error fetching local message")
+                continue
+            }
+            let authorImageUrl = AppConstants.currentUserImageUrl
+            
+            let messageItem = prepareMessageItem(authorName: authorName, authorImageUrl: authorImageUrl, message: messageText, belongsToCurrentUser: true)
+            
+            messageItems.append(messageItem)
+        }
+        guard messageItems.count > 0 else {
+            print("Loading of local messages ended but no messages were found")
+            return
+        }
+        print("Loading of local messages ended")
+        self.messageItems.append(contentsOf: messageItems)
+        view?.updateMessagesTable()
+    }
+    
+    func localMessageSaved(localMessage: MessageDataItem) {
+        insertLatestUserMessage(author: localMessage.author ?? "ErrorAuthor", message: localMessage.message ?? "ErrorMessage")
+    }
+    
+    private func insertLatestUserMessage(author: String, message: String){
+        var messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true)
+        messageItems.insert(messageViewModel, at: 0)
+        view?.onLocalMessageSent()
     }
     
     func prepareMessageItem(authorName: String, authorImageUrl: String, message: String, belongsToCurrentUser: Bool) -> MessageItemViewModel{

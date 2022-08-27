@@ -34,6 +34,9 @@
 		525EFA3028B96A3E007E0311 /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */; };
 		525EFA3628BA42E3007E0311 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA3528BA42E3007E0311 /* TitleView.swift */; };
 		525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA3728BA53D5007E0311 /* KeyboardView.swift */; };
+		52A0EE0E28BAB0A700578154 /* MessagesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE0C28BAB0A700578154 /* MessagesModel.xcdatamodeld */; };
+		52A0EE1028BAB1C200578154 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */; };
+		52A0EE1228BAC48600578154 /* CoreDataIntermediateEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +69,9 @@
 		525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
 		525EFA3528BA42E3007E0311 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		525EFA3728BA53D5007E0311 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		52A0EE0D28BAB0A700578154 /* MessagesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessagesModel.xcdatamodel; sourceTree = "<group>"; };
+		52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntermediateEntities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,7 @@
 				525EFA1528B8F8D4007E0311 /* MessengerRouter.swift */,
 				525EFA2228B90C16007E0311 /* Entities */,
 				525EFA1A28B8FB43007E0311 /* Views */,
+				52A0EE0B28BAB07F00578154 /* CoreData */,
 			);
 			path = MessengerModule;
 			sourceTree = "<group>";
@@ -182,8 +189,18 @@
 			children = (
 				525EFA2328B90C24007E0311 /* NetworkEntities.swift */,
 				525EFA2528B90C2C007E0311 /* PreparedEntities.swift */,
+				52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		52A0EE0B28BAB07F00578154 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */,
+				52A0EE0C28BAB0A700578154 /* MessagesModel.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,8 +277,10 @@
 				525EFA1C28B8FC35007E0311 /* MessageViewTableViewCell.swift in Sources */,
 				525EFA1228B8F8BA007E0311 /* MessengerPresenter.swift in Sources */,
 				525EFA1028B8F8AA007E0311 /* MessengerViewController.swift in Sources */,
+				52A0EE1228BAC48600578154 /* CoreDataIntermediateEntities.swift in Sources */,
 				525EFA1628B8F8D4007E0311 /* MessengerRouter.swift in Sources */,
 				525EFA0028B8F04E007E0311 /* Constraints.swift in Sources */,
+				52A0EE1028BAB1C200578154 /* CoreDataManager.swift in Sources */,
 				525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */,
 				525EFA2A28B937F0007E0311 /* LoadingView.swift in Sources */,
 				525EFA2428B90C24007E0311 /* NetworkEntities.swift in Sources */,
@@ -279,6 +298,7 @@
 				525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */,
 				525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */,
 				525EF9ED28B8EE72007E0311 /* SceneDelegate.swift in Sources */,
+				52A0EE0E28BAB0A700578154 /* MessagesModel.xcdatamodeld in Sources */,
 				525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */,
 				525EFA2128B90AF2007E0311 /* NetworkRequestBuilder.swift in Sources */,
 			);
@@ -486,6 +506,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		52A0EE0C28BAB0A700578154 /* MessagesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				52A0EE0D28BAB0A700578154 /* MessagesModel.xcdatamodel */,
+			);
+			currentVersion = 52A0EE0D28BAB0A700578154 /* MessagesModel.xcdatamodel */;
+			path = MessagesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 525EF9DF28B8EE72007E0311 /* Project object */;
 }
