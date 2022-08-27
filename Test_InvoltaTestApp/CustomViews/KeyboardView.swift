@@ -18,7 +18,7 @@ class KeyboardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        translatesAutoresizingMaskIntoConstraints = false
+        //translatesAutoresizingMaskIntoConstraints = false
         //backgroundColor = .red
         backgroundColor = .white
         makeConstraints()

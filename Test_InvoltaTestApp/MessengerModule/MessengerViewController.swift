@@ -25,7 +25,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     
     private var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        //tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         return tableView
@@ -48,7 +48,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         titleView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.titleViewHeightAboveSafeArea + AppConstants.safeAreaPadding.top).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.titleViewHeight).isActive = true
         //navigationItem.titleView = titleView
         //titleView.fillSuperview()
     }
@@ -57,10 +57,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     var isKeyboardShown = false
     func setKeyboard() {
         view.addSubview(keyboardView)
-        keyboardView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.keyboardParentHeight).isActive = true
-        keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        keyboardView.frame = GeneralUIConstants.keyboardFrame
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         
@@ -81,13 +78,19 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?  NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-            self.view.frame.origin.y -= keyboardHeight - AppConstants.safeAreaPadding.bottom
+
+            tableView.frame = GeneralUIConstants.calculateTableViewRectWithKeyboard(keyboardHeight: keyboardHeight)
+            
+            keyboardView.frame = GeneralUIConstants.calculateKeyboardFrameWithKeyboard(keyboardHeight: keyboardHeight)
         }
      }
     
     @objc private func keyboardWillHide(){
         print("keyboard will hide")
-        self.view.frame.origin.y = 0
+        //self.view.frame.origin.y = 0
+        //self.tableView.frame.origin.y = titleView.frame.maxY
+        tableView.frame = GeneralUIConstants.tableViewRect
+        keyboardView.frame = GeneralUIConstants.keyboardFrame
         isKeyboardShown = false
     }
     
@@ -108,7 +111,9 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         loadingView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         loadingView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        tableView.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: keyboardView.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        //tableView.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: keyboardView.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        
+        tableView.frame = GeneralUIConstants.tableViewRect
         
         tableView.delegate = self
         tableView.dataSource = self
