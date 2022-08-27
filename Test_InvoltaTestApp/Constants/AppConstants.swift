@@ -23,3 +23,7 @@ class AppConstants {
     
     static let expandCustomButtonsClickArea = CGPoint(x: 10, y: 10)
 }
+
+class GeneralUIConstants {
+    static let titleViewHeightAboveSafeArea: CGFloat = 30
+}

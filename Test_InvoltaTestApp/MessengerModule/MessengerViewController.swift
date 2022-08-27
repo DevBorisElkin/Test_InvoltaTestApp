@@ -11,6 +11,8 @@ import UIKit
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
     var presenter: MessengerPresenterProtocols?
     
+    var titleView = TitleView()
+    
     var loadingView: LoadingView = {
         let loadingView = LoadingView()
         loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,11 +34,25 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         super.viewDidLoad()
         
         view.backgroundColor = #colorLiteral(red: 0.6736666451, green: 0.8496916506, blue: 0.9686274529, alpha: 1)
+        setNavigationBar()
         setUpUI()
         presenter?.viewDidLoad()
     }
     
+    func setNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = true
+        
+        view.addSubview(titleView)
+        titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        titleView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.titleViewHeightAboveSafeArea + AppConstants.safeAreaPadding.top).isActive = true
+        //navigationItem.titleView = titleView
+        //titleView.fillSuperview()
+    }
+    
     func setUpUI() {
+        
         view.addSubview(tableView)
         
         view.addSubview(loadingView)
@@ -45,7 +61,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         loadingView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         loadingView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        tableView.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: AppConstants.safeAreaPadding.bottom, right: 0))
+        tableView.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: AppConstants.safeAreaPadding.bottom, right: 0))
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,6 +70,8 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         tableView.transform = CGAffineTransform (scaleX: 1,y: -1)
         
     }
+    
+    
     
     func onFetchMessagesStarted(isInitialLoad: Bool) {
         tableView.tableFooterView = UIHelpers.createSpinnerFooterWithBackground(height: 50, innerRectSize: CGSize(width: 30, height: 30))

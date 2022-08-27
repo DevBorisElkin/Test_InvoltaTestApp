@@ -30,9 +30,9 @@
 		525EFA2628B90C2C007E0311 /* PreparedEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2528B90C2C007E0311 /* PreparedEntities.swift */; };
 		525EFA2828B91F02007E0311 /* MessageCellLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */; };
 		525EFA2A28B937F0007E0311 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2928B937F0007E0311 /* LoadingView.swift */; };
-		525EFA2C28B948B4007E0311 /* MessagesTableViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */; };
 		525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */; };
 		525EFA3028B96A3E007E0311 /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */; };
+		525EFA3628BA42E3007E0311 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525EFA3528BA42E3007E0311 /* TitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,9 +61,9 @@
 		525EFA2528B90C2C007E0311 /* PreparedEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedEntities.swift; sourceTree = "<group>"; };
 		525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellLayoutCalculator.swift; sourceTree = "<group>"; };
 		525EFA2928B937F0007E0311 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewConstants.swift; sourceTree = "<group>"; };
 		525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkingFooterView.swift; sourceTree = "<group>"; };
 		525EFA2F28B96A3E007E0311 /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
+		525EFA3528BA42E3007E0311 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +130,7 @@
 				525EFA0A28B8F103007E0311 /* WebImageView.swift */,
 				525EFA2928B937F0007E0311 /* LoadingView.swift */,
 				525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */,
+				525EFA3528BA42E3007E0311 /* TitleView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -153,7 +154,6 @@
 			children = (
 				525EFA1828B8FA69007E0311 /* AppConstants.swift */,
 				525EFA1D28B8FE5F007E0311 /* MessageCellConstants.swift */,
-				525EFA2B28B948B4007E0311 /* MessagesTableViewConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -258,7 +258,6 @@
 				525EFA1228B8F8BA007E0311 /* MessengerPresenter.swift in Sources */,
 				525EFA1028B8F8AA007E0311 /* MessengerViewController.swift in Sources */,
 				525EFA1628B8F8D4007E0311 /* MessengerRouter.swift in Sources */,
-				525EFA2C28B948B4007E0311 /* MessagesTableViewConstants.swift in Sources */,
 				525EFA0028B8F04E007E0311 /* Constraints.swift in Sources */,
 				525EFA2E28B95348007E0311 /* ShrinkingFooterView.swift in Sources */,
 				525EFA2A28B937F0007E0311 /* LoadingView.swift in Sources */,
@@ -267,6 +266,7 @@
 				525EFA0828B8F0C5007E0311 /* UIHelpers.swift in Sources */,
 				525EFA1E28B8FE5F007E0311 /* MessageCellConstants.swift in Sources */,
 				525EFA2628B90C2C007E0311 /* PreparedEntities.swift in Sources */,
+				525EFA3628BA42E3007E0311 /* TitleView.swift in Sources */,
 				525EFA0228B8F06E007E0311 /* NetworkingHelpers.swift in Sources */,
 				525EFA0E28B8F262007E0311 /* MessengerProtocols.swift in Sources */,
 				525EFA0428B8F086007E0311 /* HttpResponses.swift in Sources */,
