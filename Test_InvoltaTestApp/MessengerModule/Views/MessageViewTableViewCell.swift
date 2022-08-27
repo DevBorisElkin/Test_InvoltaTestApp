@@ -52,6 +52,7 @@ class MessageViewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
+        //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageAuthorFont
         label.textColor = MessageCellConstants.messageAuthorFontColor
         return label
@@ -61,6 +62,7 @@ class MessageViewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
+        //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageTextFont
         label.textColor = MessageCellConstants.messageTextFontColor
         return label
@@ -105,7 +107,7 @@ class MessageViewTableViewCell: UITableViewCell {
         messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.text = viewModel.message
         
-        print("animate: \(viewModel.animationData.needToAnimate)")
+        //print("animate: \(viewModel.animationData.needToAnimate)")
         
         if(!viewModel.animationData.needToAnimate){
             slidingView.frame = bounds
@@ -113,7 +115,7 @@ class MessageViewTableViewCell: UITableViewCell {
             cardView.transform = .identity
         }else{
             slidingView.frame.size = frame.size
-            slidingView.frame.origin.x = -slidingView.frame.size.width
+            slidingView.frame.origin.x = !viewModel.belongsToCurrentUser ? -slidingView.frame.size.width : slidingView.frame.size.width
             cardView.frame = viewModel.sizes.cardViewFrame
             cardView.transform = viewModel.animationData.cardViewInitialScale
             

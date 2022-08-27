@@ -13,7 +13,7 @@ class KeyboardView: UIView {
     
     
     var lastSearchText: String = ""
-    private var searchTextField = InsertableTextField()
+    var searchTextField = InsertableTextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,7 +46,7 @@ class KeyboardView: UIView {
 // MARK: InsertableTextField
 class InsertableTextField: UITextField, UITextFieldDelegate{
 
-    weak var textChangedDelegate: TextFieldDelegate?
+    weak var textChangedDelegate: InsertableTextFieldDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -112,7 +112,7 @@ class InsertableTextField: UITextField, UITextFieldDelegate{
     }
 }
 
-protocol TextFieldDelegate: AnyObject {
+protocol InsertableTextFieldDelegate: AnyObject {
     func onTextChanged(text: String, isNotEmpty: Bool)
     func onReturnButtonPressed(for text: String)
 }

@@ -12,7 +12,8 @@ class MessageCellLayoutCalculator {
     static func calculateMessageCellSizes(authorName: String, messageText: String, messageBelongsToCurrentUser: Bool) -> MessageItemViewModel.Sizes {
         
         let cardViewWidth: CGFloat = AppConstants.screenWidth * MessageCellConstants.cardViewWidthOfScreenMult
-        let cardViewXPoint: CGFloat = MessageCellConstants.messageAuthorIconInsets.left + MessageCellConstants.messageAuthorIconSize.width + MessageCellConstants.cardViewOffset.left
+        let cardViewXPoint: CGFloat = !messageBelongsToCurrentUser ? MessageCellConstants.messageAuthorIconInsets.left + MessageCellConstants.messageAuthorIconSize.width + MessageCellConstants.cardViewOffset.left
+        : AppConstants.screenWidth -  ( MessageCellConstants.messageAuthorIconInsets.right + MessageCellConstants.messageAuthorIconSize.width + MessageCellConstants.cardViewOffset.right + cardViewWidth )
         
         var authorImageFrameOrigin = CGPoint.zero
         if !messageBelongsToCurrentUser {
@@ -28,7 +29,7 @@ class MessageCellLayoutCalculator {
         // MARK: Calculate author name frame
         var authorNameFame = CGRect(origin: CGPoint(x: MessageCellConstants.messageAuthorInsets.left , y: MessageCellConstants.messageAuthorInsets.top), size: .zero)
         
-        let authorNameWidth: CGFloat = cardViewWidth - authorImageFrame.maxX - MessageCellConstants.messageAuthorInsets.left - MessageCellConstants.messageAuthorInsets.right
+        let authorNameWidth: CGFloat = cardViewWidth - MessageCellConstants.messageAuthorInsets.left - MessageCellConstants.messageAuthorInsets.right
         
         if !authorName.isEmpty {
             var height = authorName.height(width: authorNameWidth, font: MessageCellConstants.messageAuthorFont)
@@ -45,7 +46,7 @@ class MessageCellLayoutCalculator {
         // MARK: Calculate comment text frame
         var messageTextFrame = CGRect(origin: CGPoint(x: MessageCellConstants.messageTextInsets.left , y:  authorNameFame.maxY + MessageCellConstants.messageTextInsets.top), size: .zero)
         
-        let messageTextWidth: CGFloat = cardViewWidth - authorImageFrame.maxX - MessageCellConstants.messageTextInsets.left - MessageCellConstants.messageTextInsets.right
+        let messageTextWidth: CGFloat = cardViewWidth - MessageCellConstants.messageTextInsets.left - MessageCellConstants.messageTextInsets.right
         
         if !messageText.isEmpty {
             let height = messageText.height(width: messageTextWidth, font: MessageCellConstants.messageTextFont)

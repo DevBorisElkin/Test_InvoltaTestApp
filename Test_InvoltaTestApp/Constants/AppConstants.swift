@@ -23,6 +23,9 @@ class AppConstants {
     static let messagesRequestArtificialDelay: Double = 0.6
     
     static let expandCustomButtonsClickArea = CGPoint(x: 10, y: 10)
+    
+    static let currentUserImageUrl = "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg"
+    static let currentUserNickname = "Mr.Bob"
 }
 
 class GeneralUIConstants {

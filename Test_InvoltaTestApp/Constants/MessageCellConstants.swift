@@ -23,7 +23,7 @@ class MessageCellConstants {
     static let cardViewWidthOfScreenMult: CGFloat = 0.65
     
     static let messageAuthorIconSize = CGSize(width: 45, height: 45)
-    static let messageAuthorIconInsets = UIEdgeInsets(top: 6, left: 9, bottom: 16, right: 8)
+    static let messageAuthorIconInsets = UIEdgeInsets(top: 6, left: 8, bottom: 16, right: 8)
     
     static let messageAuthorInsets = UIEdgeInsets(top: 8, left: 9, bottom: 5, right: 9)
     static let messageTextInsets = UIEdgeInsets(top: 4, left: 9, bottom: 8, right: 9)

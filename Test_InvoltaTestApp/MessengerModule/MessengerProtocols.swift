@@ -15,6 +15,7 @@ protocol MessengerViewToPresenterProtocol: AnyObject {
     
     func viewDidLoad()
     func getMessages()
+    func userSentMessage(message: String)
 }
 
 protocol MessengerViewToPresenterTableViewProtocol: AnyObject {
@@ -34,6 +35,7 @@ protocol MessengerPresenterToViewProtocol: AnyObject {
     func onFetchMessagesStarted(isInitialLoad: Bool)
     func onFetchMessagesCompleted(addedAnyNewMessages: Bool)
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool)
+    func onLocalMessageSent()
 }
 
 protocol MessengerPresenterToInteractorProtocol: AnyObject {

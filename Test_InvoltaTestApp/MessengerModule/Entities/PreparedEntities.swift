@@ -12,6 +12,7 @@ struct MessageItemViewModel {
     var authorRandomName: String
     var authorRandomImageUrl: String
     var message: String
+    var belongsToCurrentUser: Bool
     var sizes: Sizes
     var animationData = AnimationSupportingData()
     

@@ -11,7 +11,10 @@ import UIKit
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
     var presenter: MessengerPresenterProtocols?
     
+    var isKeyboardShown = false
+    
     var titleView = TitleView()
+    
     var keyboardView = KeyboardView()
     
     var loadingView: LoadingView = {
@@ -21,11 +24,8 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         return loadingView
     }()
     
-    //var refreshView: UIView?
-    
     private var tableView: UITableView = {
         let tableView = UITableView()
-        //tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         return tableView
@@ -34,13 +34,19 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = #colorLiteral(red: 0.6736666451, green: 0.8496916506, blue: 0.9686274529, alpha: 1)
-        setNavigationBar()
-        setKeyboard()
-        setUpUI()
+        setUI()
         presenter?.viewDidLoad()
     }
     
+    func setUI(){
+        view.backgroundColor = #colorLiteral(red: 0.6736666451, green: 0.8496916506, blue: 0.9686274529, alpha: 1)
+        setNavigationBar()
+        setKeyboard()
+        setTableView()
+        setLoadingView()
+    }
+    
+    // MARK: SET UI
     func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
         
@@ -49,20 +55,16 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         titleView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         titleView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.titleViewHeight).isActive = true
-        //navigationItem.titleView = titleView
-        //titleView.fillSuperview()
     }
     
-    // MARK: KEYBOARD SET UP
-    var isKeyboardShown = false
     func setKeyboard() {
         view.addSubview(keyboardView)
         keyboardView.frame = GeneralUIConstants.keyboardFrame
+        keyboardView.searchTextField.textChangedDelegate = self
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
@@ -71,8 +73,6 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     @objc private func keyboardWillShow(notification: NSNotification){
-        print("keyboard will show")
-        
         guard !isKeyboardShown else { return }
         isKeyboardShown = true
         
@@ -86,9 +86,6 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
      }
     
     @objc private func keyboardWillHide(){
-        print("keyboard will hide")
-        //self.view.frame.origin.y = 0
-        //self.tableView.frame.origin.y = titleView.frame.maxY
         tableView.frame = GeneralUIConstants.tableViewRect
         keyboardView.frame = GeneralUIConstants.keyboardFrame
         isKeyboardShown = false
@@ -99,19 +96,9 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // MARK: OTHER
-    
-    func setUpUI() {
+    func setTableView() {
         
         view.addSubview(tableView)
-        
-        view.addSubview(loadingView)
-        loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loadingView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 30).isActive = true
-        loadingView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        loadingView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        //tableView.anchor(top: titleView.bottomAnchor, leading: view.leadingAnchor, bottom: keyboardView.topAnchor, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         tableView.frame = GeneralUIConstants.tableViewRect
         
@@ -122,9 +109,15 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         tableView.transform = CGAffineTransform (scaleX: 1,y: -1)
     }
     
+    func setLoadingView() {
+        view.addSubview(loadingView)
+        loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadingView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 30).isActive = true
+        loadingView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        loadingView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
     
-    
-    
+    // MARK: MessengerView Protocol methods
     
     func onFetchMessagesStarted(isInitialLoad: Bool) {
         tableView.tableFooterView = UIHelpers.createSpinnerFooterWithBackground(height: 50, innerRectSize: CGSize(width: 30, height: 30))
@@ -151,7 +144,13 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
             // error but continue loading, present something small like 'networking problems'
         }
     }
+    
+    func onLocalMessageSent() {
+        tableView.reloadData()
+    }
 }
+
+// MARK: Table view protocols
 
 extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -175,5 +174,16 @@ extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
             let topRow = IndexPath(row: presenter.lastRowIndex(), section: 0)
             self.tableView.scrollToRow(at: topRow, at: .top, animated: true)
         }
+    }
+}
+
+extension MessengerViewController: InsertableTextFieldDelegate {
+    func onTextChanged(text: String, isNotEmpty: Bool) {
+        // text changed
+    }
+    
+    func onReturnButtonPressed(for text: String) {
+        print("VC user sent message: \(text)")
+        presenter?.userSentMessage(message: text)
     }
 }

@@ -35,6 +35,16 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
             interactor?.loadMessages(messageOffset: messageOffset)
         }
     }
+    
+    func userSentMessage(message: String) {
+        insertLatestUserMessage(message: message)
+    }
+    
+    private func insertLatestUserMessage(message: String){
+        var messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true)
+        messageItems.insert(messageViewModel, at: 0)
+        view?.onLocalMessageSent()
+    }
 }
 
 // MARK: TableViewRelated
@@ -97,13 +107,10 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         for i in 0 ..< messagesData.result.count {
             
             let authorName = "Bob bb"
+            let authorImageUrl = NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i)
             let messageText = messagesData.result[i]
             
-            let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: messageText, messageBelongsToCurrentUser: false)
-            
-            let messageItem = MessageItemViewModel(authorRandomName: authorName,
-                                          authorRandomImageUrl: NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i),
-                                                   message: messageText, sizes: sizes)
+            let messageItem = prepareMessageItem(authorName: authorName, authorImageUrl: authorImageUrl, message: messageText, belongsToCurrentUser: false)
             
             messageItems.append(messageItem)
         }
@@ -114,6 +121,14 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         }
         
         isFetchingContent = false
+    }
+    
+    func prepareMessageItem(authorName: String, authorImageUrl: String, message: String, belongsToCurrentUser: Bool) -> MessageItemViewModel{
+        let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: message, messageBelongsToCurrentUser: belongsToCurrentUser)
+        
+        return MessageItemViewModel(authorRandomName: authorName,
+                                      authorRandomImageUrl: authorImageUrl,
+                                               message: message, belongsToCurrentUser: belongsToCurrentUser, sizes: sizes)
     }
     
     func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool) {
