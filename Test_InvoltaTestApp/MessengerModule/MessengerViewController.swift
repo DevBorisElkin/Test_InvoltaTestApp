@@ -53,13 +53,50 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         //titleView.fillSuperview()
     }
     
+    // MARK: KEYBOARD SET UP
+    var isKeyboardShown = false
     func setKeyboard() {
         view.addSubview(keyboardView)
         keyboardView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.keyboardParentHeight).isActive = true
         keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification){
+        print("keyboard will show")
+        
+        guard !isKeyboardShown else { return }
+        isKeyboardShown = true
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?  NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            self.view.frame.origin.y -= keyboardHeight - AppConstants.safeAreaPadding.bottom
+        }
+     }
+    
+    @objc private func keyboardWillHide(){
+        print("keyboard will hide")
+        self.view.frame.origin.y = 0
+        isKeyboardShown = false
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // MARK: OTHER
     
     func setUpUI() {
         
