@@ -42,6 +42,7 @@
 		52A0EE1828BB9BA300578154 /* MessageDetailsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1728BB9BA300578154 /* MessageDetailsConstants.swift */; };
 		52A0EE1A28BBA2B500578154 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1928BBA2B500578154 /* PaddingLabel.swift */; };
 		52A0EE1C28BBA73000578154 /* ExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1B28BBA73000578154 /* ExpandedButton.swift */; };
+		52A0EE1E28BBC7AC00578154 /* MessageDetailsLayoutCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1D28BBC7AC00578154 /* MessageDetailsLayoutCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		52A0EE1728BB9BA300578154 /* MessageDetailsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailsConstants.swift; sourceTree = "<group>"; };
 		52A0EE1928BBA2B500578154 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		52A0EE1B28BBA73000578154 /* ExpandedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedButton.swift; sourceTree = "<group>"; };
+		52A0EE1D28BBC7AC00578154 /* MessageDetailsLayoutCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailsLayoutCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				525EFA2728B91F02007E0311 /* MessageCellLayoutCalculator.swift */,
+				52A0EE1D28BBC7AC00578154 /* MessageDetailsLayoutCalculator.swift */,
 			);
 			path = LayoutCalculators;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				525EFA0428B8F086007E0311 /* HttpResponses.swift in Sources */,
 				525EFA1428B8F8C5007E0311 /* MessengerInteractor.swift in Sources */,
 				525EFA0628B8F0A9007E0311 /* TextHeight.swift in Sources */,
+				52A0EE1E28BBC7AC00578154 /* MessageDetailsLayoutCalculator.swift in Sources */,
 				525EFA2828B91F02007E0311 /* MessageCellLayoutCalculator.swift in Sources */,
 				52A0EE1C28BBA73000578154 /* ExpandedButton.swift in Sources */,
 				525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */,

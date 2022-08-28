@@ -18,11 +18,6 @@ class MessageDetailsView: UIView {
     private let initialFade = 0.0
     private let targetFade = 0.7
     
-    // MARK: Sizes
-    private static let aspectRatio = AppConstants.screenWidth / AppConstants.screenHeight
-    private let spaceToOccupy = CGSize(width: max(MessageDetailsView.aspectRatio * 1.3, 0.7), height: MessageDetailsView.aspectRatio)
-    var totalSpaceToOccupy: CGSize { CGSize(width: AppConstants.screenWidth * spaceToOccupy.width, height: AppConstants.screenHeight * spaceToOccupy.height) }
-    var insents: CGPoint { CGPoint(x: (AppConstants.screenWidth - totalSpaceToOccupy.width) / 2, y: (AppConstants.screenHeight - totalSpaceToOccupy.height) / 2) }
     
     lazy var cardView: UIView = {
         let view = UIView()
@@ -39,7 +34,7 @@ class MessageDetailsView: UIView {
     
     lazy var messageAuthorIconImage: WebImageView = {
         let imageView = WebImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        //imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.checkForAbsoluteUrl = false
         imageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         imageView.layer.cornerRadius = (MessageDetailsConstants.messageAuthorIconSize.width / 2)
@@ -50,53 +45,53 @@ class MessageDetailsView: UIView {
     
     lazy var messageAuthorLabel: PaddingLabel = {
         let label = PaddingLabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        //label.translatesAutoresizingMaskIntoConstraints = false
         label.font = MessageDetailsConstants.messageAuthorFont
         label.textColor = MessageDetailsConstants.messageAuthorFontColor
         label.textAlignment = .center
-        label.layer.cornerRadius = (label.height() + label.intrinsicContentSize.height) / 2
         label.layer.masksToBounds = true
         label.numberOfLines = 0
-        label.backgroundColor = .clear
-        label.backgroundColor = .blue
+        label.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        //label.backgroundColor = .blue
         
         return label
     }()
     
     lazy var messageDateLabel: PaddingLabel = {
         let label = PaddingLabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        //label.translatesAutoresizingMaskIntoConstraints = false
         label.font = MessageDetailsConstants.messageDateFont
         label.textColor = MessageDetailsConstants.messageDateFontColor
         label.textAlignment = .center
-        label.layer.cornerRadius = (label.height() + label.intrinsicContentSize.height) / 2
         label.layer.masksToBounds = true
         label.numberOfLines = 0
-        label.backgroundColor = .clear
-        label.backgroundColor = .blue
+        label.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        //label.backgroundColor = .blue
         
         return label
     }()
     
     lazy var messageTextLabel: UITextView = {
         let label = UITextView()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        //label.translatesAutoresizingMaskIntoConstraints = false
         //label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.backgroundColor = .blue
+        label.isEditable = false
+        label.textAlignment = .center
         label.font = MessageDetailsConstants.messageTextFont
         label.textColor = MessageDetailsConstants.messageTextFontColor
+        label.isSelectable = false
         return label
     }()
     
     lazy var bottomButtonsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        //stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
         stackView.spacing = 0
-        stackView.backgroundColor = .lightGray
+        //stackView.backgroundColor = .lightGray
         return stackView
     }()
     
@@ -114,7 +109,7 @@ class MessageDetailsView: UIView {
     lazy var closeMessageDetailsButton: ExpandedButton = {
         var button = ExpandedButton()
         button.clickIncreasedArea = AppConstants.expandCustomButtonsClickArea
-        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Назад", for: .normal)
         let buttonTextColor = #colorLiteral(red: 0.2392156869, green: 0.5184240254, blue: 0.9686274529, alpha: 1)
         button.setTitleColor(buttonTextColor, for: .normal)
@@ -126,7 +121,7 @@ class MessageDetailsView: UIView {
     lazy var deleteMessageDetailsButton: ExpandedButton = {
         var button = ExpandedButton()
         button.clickIncreasedArea = AppConstants.expandCustomButtonsClickArea
-        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Удалить", for: .normal)
         let buttonTextColor = #colorLiteral(red: 0.7443636798, green: 0.1364066129, blue: 0.2615735445, alpha: 1)
         button.setTitleColor(buttonTextColor, for: .normal)
@@ -140,20 +135,9 @@ class MessageDetailsView: UIView {
         self.frame = CGRect(origin: .zero, size: CGSize(width: AppConstants.screenWidth, height: AppConstants.screenHeight))
         backgroundColor = backgroundFadeColor.withAlphaComponent(initialFade)
         
-        addSubview(cardView)
-        
-        cardView.alpha = 0
-        cardView.frame = CGRect(origin: insents, size: totalSpaceToOccupy)
-        
-        cardView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGestureAction(_:))))
-        
-        cardViewInitialPos = cardView.frame.origin.x
-        self.lastIterationFrame = cardView.frame
-        
         setInnerUI(viewModel: viewModel)
         
         // Animate opening
-        
         UIView.animate(withDuration: 1) { [weak self, backgroundFadeColor, targetFade] in
             self?.backgroundColor = backgroundFadeColor.withAlphaComponent(targetFade)
             self?.cardView.alpha = 1
@@ -161,57 +145,52 @@ class MessageDetailsView: UIView {
     }
     
     private func setInnerUI(viewModel: MessageDetailsViewModel) {
-        viewModel.printValues()
+        // MARK: Base card view
+        addSubview(cardView)
         
-        // MARK: MessageAuthorIcon
-        cardView.addSubview(messageAuthorIconImage)
-        messageAuthorIconImage.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
-        messageAuthorIconImage.topAnchor.constraint(equalTo: cardView.topAnchor, constant: MessageDetailsConstants.messageAuthorIconOffsetFromCardView).isActive = true
-        messageAuthorIconImage.widthAnchor.constraint(equalToConstant: MessageDetailsConstants.messageAuthorIconSize.width).isActive = true
-        messageAuthorIconImage.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.messageAuthorIconSize.height).isActive = true
+        cardView.alpha = 0
+        cardView.frame = viewModel.sizes.cardViewFrame
         
-        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        cardView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGestureAction(_:))))
         
-        // MARK: MessageAuthorName
-        cardView.addSubview(messageAuthorLabel)
-        messageAuthorLabel.anchor(top: messageAuthorIconImage.bottomAnchor, leading: cardView.leadingAnchor, bottom: nil, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.messageAuthorInsets)
-        messageAuthorLabel.heightAnchor.constraint(equalToConstant: messageAuthorLabel.height() + messageAuthorLabel.intrinsicContentSize.height).isActive = true
-        messageAuthorLabel.text = viewModel.authorName
-        
-        // MARK: MessageDate label
-        cardView.addSubview(messageDateLabel)
-        messageDateLabel.anchor(top: messageAuthorLabel.bottomAnchor, leading: cardView.leadingAnchor, bottom: nil, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.messageDateInsets)
-        messageDateLabel.heightAnchor.constraint(equalToConstant: messageDateLabel.height() + messageDateLabel.intrinsicContentSize.height).isActive = true
-        messageDateLabel.text = "Sept 16, 15:37"
+        cardViewInitialPos = cardView.frame.origin.x
+        self.lastIterationFrame = cardView.frame
         
         // MARK: Close Message Details Top-right button
         cardView.addSubview(topRightcloseMessageDetailsButton)
         topRightcloseMessageDetailsButton.anchor(top: cardView.topAnchor, leading: nil, bottom: nil, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.topRightCloseMessageDetailsButtonInsets, size: MessageDetailsConstants.topRightCloseMessageDetailsButtonSize)
         
-        // MARK: Stack view with buttons
-        cardView.addSubview(bottomButtonsStackView)
-        bottomButtonsStackView.anchor(top: nil, leading: cardView.leadingAnchor, bottom: cardView.bottomAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.buttonsStackViewInsets)
-        bottomButtonsStackView.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.buttonsStackViewHeight).isActive = true
+
+        // MARK: Other views setting by frame
+        cardView.addSubview(messageAuthorIconImage)
+        messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
+        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
         
+        cardView.addSubview(messageAuthorLabel)
+        messageAuthorLabel.frame = viewModel.sizes.authorNameFame
+        messageAuthorLabel.text = viewModel.authorName
+        messageAuthorLabel.layer.cornerRadius = viewModel.sizes.authorNameFame.height / 2
+        
+        cardView.addSubview(messageDateLabel)
+        messageDateLabel.frame = viewModel.sizes.messageDateFrame
+        messageDateLabel.text = "Sept 16, 15:37"
+        messageDateLabel.layer.cornerRadius = viewModel.sizes.messageDateFrame.height / 2
+        
+        cardView.addSubview(bottomButtonsStackView)
+        bottomButtonsStackView.frame = viewModel.sizes.bottomButtonsStackViewFrame
         bottomButtonsStackView.addArrangedSubview(deleteMessageDetailsButton)
         bottomButtonsStackView.addArrangedSubview(closeMessageDetailsButton)
         
-//        // MARK: Close Message Details button
-//        cardView.addSubview(closeMessageDetailsButton)
-//        closeMessageDetailsButton.anchor(top: nil, leading: nil, bottom: cardView.bottomAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.closeMessageDetailsButtonInsets)
-//        closeMessageDetailsButton.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.closeMessageDetailsButtonSize.height).isActive = true
-//
-//        // MARK: Delete Message Details button
-//        cardView.addSubview(deleteMessageDetailsButton)
-//        deleteMessageDetailsButton.centerYAnchor.constraint(equalTo: closeMessageDetailsButton.centerYAnchor).isActive = true
-//        deleteMessageDetailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: MessageDetailsConstants.deleteMessageDetailsButtonInsets.left).isActive = true
-//        deleteMessageDetailsButton.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.deleteMessageDetailsButtonSize.height).isActive = true
-        
-        // MARK: Message Text label
         cardView.addSubview(messageTextLabel)
-        //messageAuthorLabel.setContentCompressionResistancePriority(.defaultHigh , for: .vertical)
-        messageTextLabel.anchor(top: messageDateLabel.bottomAnchor, leading: cardView.leadingAnchor, bottom: closeMessageDetailsButton.topAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.messageTextInsets)
+        messageTextLabel.frame = viewModel.sizes.messageFrame
         messageTextLabel.text = viewModel.message
+        let messageTextMultipleLines = messageTextLabel.maxNumberOfLines > 1
+        messageTextLabel.isScrollEnabled = messageTextMultipleLines
+        if messageTextMultipleLines {
+            messageTextLabel.layer.cornerRadius = 8
+            messageTextLabel.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            messageTextLabel.textAlignment = .justified
+        }
         
         // MARK: Assign button actions
         topRightcloseMessageDetailsButton.addTarget(self, action: #selector(closeButtonPessed), for: .touchUpInside)

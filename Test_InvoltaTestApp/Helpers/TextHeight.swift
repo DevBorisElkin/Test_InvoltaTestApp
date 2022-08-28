@@ -45,3 +45,23 @@ extension UILabel {
         return ceil(size.height)
     }
 }
+
+extension UILabel {
+    var maxNumberOfLines: Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(MAXFLOAT))
+        let text = (self.text ?? "") as NSString
+        let textHeight = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [.font: font ?? UIFont.systemFont(ofSize: 10)], context: nil).height
+        let lineHeight = font.lineHeight
+        return Int(ceil(textHeight / lineHeight))
+    }
+}
+
+extension UITextView {
+    var maxNumberOfLines: Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(MAXFLOAT))
+        let text = (self.text ?? "") as NSString
+        let textHeight = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [.font: font ?? UIFont.systemFont(ofSize: 10)], context: nil).height
+        let lineHeight = font?.lineHeight ?? 1
+        return Int(ceil(textHeight / lineHeight))
+    }
+}

@@ -41,8 +41,14 @@ struct MessageDetailsViewModel {
     var message: String
     var belongsToCurrentUser: Bool
     var messageId: Int
+    var sizes: Sizes
     
-    func printValues() {
-        print("authorName: \(authorName)\nmessage: \(message)")
+    struct Sizes {
+        var authorImageFrame: CGRect
+        var authorNameFame: CGRect
+        var messageDateFrame: CGRect
+        var messageFrame: CGRect
+        var bottomButtonsStackViewFrame: CGRect
+        var cardViewFrame: CGRect
     }
 }

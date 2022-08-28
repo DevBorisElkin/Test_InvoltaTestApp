@@ -62,12 +62,15 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
             return
         }
         
+        let sizes = MessageDetailsLayoutCalculator.calculateDetailsViewSizes(message: relatedMessage.message)
+        
         let messageDetails = MessageDetailsViewModel(
             authorName: relatedMessage.authorRandomName,
             authorRandomImageUrl: relatedMessage.authorRandomImageUrl,
             message: relatedMessage.message,
             belongsToCurrentUser: relatedMessage.belongsToCurrentUser,
-            messageId: relatedMessage.messageId)
+            messageId: relatedMessage.messageId,
+            sizes: sizes)
         view?.openMessageDetails(messageDetails: messageDetails)
     }
 }
