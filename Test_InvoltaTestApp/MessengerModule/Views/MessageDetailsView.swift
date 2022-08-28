@@ -78,10 +78,10 @@ class MessageDetailsView: UIView {
         return label
     }()
     
-    lazy var messageTextLabel: UILabel = {
-        let label = UILabel()
+    lazy var messageTextLabel: UITextView = {
+        let label = UITextView()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        //label.numberOfLines = 0
         label.backgroundColor = .clear
         label.backgroundColor = .blue
         label.font = MessageDetailsConstants.messageTextFont
@@ -89,7 +89,18 @@ class MessageDetailsView: UIView {
         return label
     }()
     
-    lazy var closeMessageDetailsButton: ExpandedButton = {
+    lazy var bottomButtonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 0
+        stackView.backgroundColor = .lightGray
+        return stackView
+    }()
+    
+    lazy var topRightcloseMessageDetailsButton: ExpandedButton = {
         var button = ExpandedButton()
         button.clickIncreasedArea = AppConstants.expandCustomButtonsClickArea
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -100,14 +111,27 @@ class MessageDetailsView: UIView {
         return button
     }()
     
+    lazy var closeMessageDetailsButton: ExpandedButton = {
+        var button = ExpandedButton()
+        button.clickIncreasedArea = AppConstants.expandCustomButtonsClickArea
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Назад", for: .normal)
+        let buttonTextColor = #colorLiteral(red: 0.2392156869, green: 0.5184240254, blue: 0.9686274529, alpha: 1)
+        button.setTitleColor(buttonTextColor, for: .normal)
+        button.backgroundColor = .clear
+        //button.backgroundColor = .blue
+        return button
+    }()
+    
     lazy var deleteMessageDetailsButton: ExpandedButton = {
         var button = ExpandedButton()
         button.clickIncreasedArea = AppConstants.expandCustomButtonsClickArea
         button.translatesAutoresizingMaskIntoConstraints = false
-        var buttonImage = UIImage(named: "delete_1")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(buttonImage, for: .normal)
-        button.imageView?.tintColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        button.setTitle("Удалить", for: .normal)
+        let buttonTextColor = #colorLiteral(red: 0.7443636798, green: 0.1364066129, blue: 0.2615735445, alpha: 1)
+        button.setTitleColor(buttonTextColor, for: .normal)
         button.backgroundColor = .clear
+        //button.backgroundColor = .green
         return button
     }()
     
@@ -160,24 +184,37 @@ class MessageDetailsView: UIView {
         messageDateLabel.heightAnchor.constraint(equalToConstant: messageDateLabel.height() + messageDateLabel.intrinsicContentSize.height).isActive = true
         messageDateLabel.text = "Sept 16, 15:37"
         
-        // MARK: Close Message Details button
-        cardView.addSubview(closeMessageDetailsButton)
-        closeMessageDetailsButton.anchor(top: cardView.topAnchor, leading: nil, bottom: nil, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.closeMessageDetailsButtonInsets, size: MessageDetailsConstants.closeMessageDetailsButtonSize)
+        // MARK: Close Message Details Top-right button
+        cardView.addSubview(topRightcloseMessageDetailsButton)
+        topRightcloseMessageDetailsButton.anchor(top: cardView.topAnchor, leading: nil, bottom: nil, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.topRightCloseMessageDetailsButtonInsets, size: MessageDetailsConstants.topRightCloseMessageDetailsButtonSize)
         
-        // MARK: Delete Message Details button
-        cardView.addSubview(deleteMessageDetailsButton)
-        deleteMessageDetailsButton.centerYAnchor.constraint(equalTo: closeMessageDetailsButton.centerYAnchor).isActive = true
-        deleteMessageDetailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: MessageDetailsConstants.deleteMessageDetailsButtonInsets.left).isActive = true
-        deleteMessageDetailsButton.widthAnchor.constraint(equalToConstant: MessageDetailsConstants.deleteMessageDetailsButtonSize.width).isActive = true
-        deleteMessageDetailsButton.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.deleteMessageDetailsButtonSize.height).isActive = true
+        // MARK: Stack view with buttons
+        cardView.addSubview(bottomButtonsStackView)
+        bottomButtonsStackView.anchor(top: nil, leading: cardView.leadingAnchor, bottom: cardView.bottomAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.buttonsStackViewInsets)
+        bottomButtonsStackView.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.buttonsStackViewHeight).isActive = true
         
-        // MARK: Message Text labe
+        bottomButtonsStackView.addArrangedSubview(deleteMessageDetailsButton)
+        bottomButtonsStackView.addArrangedSubview(closeMessageDetailsButton)
+        
+//        // MARK: Close Message Details button
+//        cardView.addSubview(closeMessageDetailsButton)
+//        closeMessageDetailsButton.anchor(top: nil, leading: nil, bottom: cardView.bottomAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.closeMessageDetailsButtonInsets)
+//        closeMessageDetailsButton.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.closeMessageDetailsButtonSize.height).isActive = true
+//
+//        // MARK: Delete Message Details button
+//        cardView.addSubview(deleteMessageDetailsButton)
+//        deleteMessageDetailsButton.centerYAnchor.constraint(equalTo: closeMessageDetailsButton.centerYAnchor).isActive = true
+//        deleteMessageDetailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: MessageDetailsConstants.deleteMessageDetailsButtonInsets.left).isActive = true
+//        deleteMessageDetailsButton.heightAnchor.constraint(equalToConstant: MessageDetailsConstants.deleteMessageDetailsButtonSize.height).isActive = true
+        
+        // MARK: Message Text label
         cardView.addSubview(messageTextLabel)
         //messageAuthorLabel.setContentCompressionResistancePriority(.defaultHigh , for: .vertical)
-        messageTextLabel.anchor(top: messageDateLabel.bottomAnchor, leading: cardView.leadingAnchor, bottom: cardView.bottomAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.messageTextInsets)
+        messageTextLabel.anchor(top: messageDateLabel.bottomAnchor, leading: cardView.leadingAnchor, bottom: closeMessageDetailsButton.topAnchor, trailing: cardView.trailingAnchor, padding: MessageDetailsConstants.messageTextInsets)
         messageTextLabel.text = viewModel.message
         
         // MARK: Assign button actions
+        topRightcloseMessageDetailsButton.addTarget(self, action: #selector(closeButtonPessed), for: .touchUpInside)
         closeMessageDetailsButton.addTarget(self, action: #selector(closeButtonPessed), for: .touchUpInside)
         deleteMessageDetailsButton.addTarget(self, action: #selector(deleteButtonPessed), for: .touchUpInside)
     }

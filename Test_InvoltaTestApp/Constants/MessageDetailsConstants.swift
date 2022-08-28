@@ -32,9 +32,16 @@ class MessageDetailsConstants {
     static let messageTextInsets = UIEdgeInsets(top: 8, left: 9, bottom: 8, right: 9)
     
     // MARK: Buttons insets
-    static let closeMessageDetailsButtonInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-    static let closeMessageDetailsButtonSize = CGSize(width: 20, height: 20)
+    static let topRightCloseMessageDetailsButtonInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+    static let topRightCloseMessageDetailsButtonSize = CGSize(width: 20, height: 20)
     
-    static let deleteMessageDetailsButtonInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-    static let deleteMessageDetailsButtonSize = CGSize(width: 26, height: 26)
+    // Bottom buttons
+    static let buttonsStackViewInsets = UIEdgeInsets(top: 5, left: 5, bottom: 8, right: 5)
+    static let buttonsStackViewHeight: CGFloat = 20
+    
+    static let closeMessageDetailsButtonInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    static let closeMessageDetailsButtonSize = CGSize(width: 100, height: 30)
+    
+    static let deleteMessageDetailsButtonInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    static let deleteMessageDetailsButtonSize = CGSize(width: 100, height: 30)
 }
