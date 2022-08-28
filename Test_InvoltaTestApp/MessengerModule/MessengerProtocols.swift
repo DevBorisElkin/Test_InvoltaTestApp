@@ -16,6 +16,7 @@ protocol MessengerViewToPresenterProtocol: AnyObject {
     func viewDidLoad()
     func getMessages()
     func userSentMessage(message: String)
+    func requestedToDeleteMessage(messageid: Int, belongsToCurrentUser: Bool)
 }
 
 protocol MessengerViewToPresenterTableViewProtocol: AnyObject {
@@ -45,6 +46,7 @@ protocol MessengerPresenterToInteractorProtocol: AnyObject {
     func loadMessages(messageOffset: Int)
     func loadLocalMessages()
     func saveLocalMessage(messageEntity: CoreDataMessageEntityToSave)
+    func deleteLocalMessage(messageId: Int)
 }
 
 protocol MessengerInteractorToPresenterProtocol: AnyObject {
@@ -52,6 +54,7 @@ protocol MessengerInteractorToPresenterProtocol: AnyObject {
     func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool)
     func receivedLocalMessages(localMessages: [MessageDataItem])
     func localMessageSaved(localMessage: MessageDataItem)
+    func deletedLocalMessage(messageId: Int, success: Bool)
 }
 
 typealias EntryPoint = MessengerPresenterToViewProtocol & UIViewController

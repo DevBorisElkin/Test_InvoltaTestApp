@@ -22,22 +22,34 @@ class CoreDataManager {
         let maxMessageId: Int = Int((messages.max { lhs, rhs in
             return lhs.messageId < rhs.messageId
         })?.messageId ?? 0)
+        print("Generated new message id: \(maxMessageId + 1)")
         return maxMessageId + 1
     }
     
     func getMessageDataItems() -> [MessageDataItem] {
         loadDataFromMemory()
-        messages.sort(by: {$0.messageId < $1.messageId})
+        
+        for message in messages {
+            print("messageId: \(message.messageId)")
+        }
+        
+        //messages.sort(by: {$0.messageId < $1.messageId})
+        messages.reverse()
         return messages
     }
     
     func deleteMessage(by id: Int) -> Bool {
+        print("Delete message by id: \(id)")
         let context = context
         let fetchRequest: NSFetchRequest<MessageDataItem> = MessageDataItem.fetchRequest()
         
-        if let tasks = try? context.fetch(fetchRequest), let taskToDelete = tasks.first(where: { $0.messageId == id }){
-            context.delete(taskToDelete)
+        guard let tasks = try? context.fetch(fetchRequest), let taskToDelete = tasks.first(where: { $0.messageId == id }) else {
+            print("Core data manager unable get context or find task to delete")
+            return false
         }
+        
+        context.delete(taskToDelete)
+        self.messages.removeAll(where: { $0.messageId == id })
         
         do {
             try context.save()
@@ -60,6 +72,7 @@ class CoreDataManager {
                                             
         do {
             try context.save()
+            messages.append(messageObject)
             return messageObject
         } catch let error as NSError {
             print(error.localizedDescription)

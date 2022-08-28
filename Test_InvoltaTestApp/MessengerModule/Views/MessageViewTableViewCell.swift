@@ -11,6 +11,10 @@ import UIKit
 class MessageViewTableViewCell: UITableViewCell {
     static let reuseId = "MessageViewTableViewCell"
     
+    weak var presenter: MessengerViewToPresenterProtocol?
+    var messageId: Int!
+    var belongsToCurentUser: Bool!
+    
     lazy var slidingView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -68,6 +72,11 @@ class MessageViewTableViewCell: UITableViewCell {
         return label
     }()
     
+    lazy var tapView: TapView = {
+        let view = TapView()
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -92,13 +101,19 @@ class MessageViewTableViewCell: UITableViewCell {
         cardView.addSubview(shadowView)
         shadowView.fillSuperview()
         
+        contentView.addSubview(tapView)
+        
         // MARK: subviews of card view
         cardView.addSubview(messageAuthorIconImage)
         cardView.addSubview(messageAuthorLabel)
         cardView.addSubview(messageTextLabel)
     }
     
-    func setUp(viewModel: MessageItemViewModel){
+    func setUp(presenter: MessengerViewToPresenterProtocol, viewModel: MessageItemViewModel){
+        self.presenter = presenter
+        self.messageId = viewModel.messageId
+        self.belongsToCurentUser = viewModel.belongsToCurrentUser
+        
         messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
         messageAuthorLabel.frame = viewModel.sizes.authorNameFame
         messageTextLabel.frame = viewModel.sizes.messageTextFrame
@@ -124,5 +139,12 @@ class MessageViewTableViewCell: UITableViewCell {
                 self?.cardView.transform = .identity
             }
         }
+        
+        tapView.frame = viewModel.sizes.cardViewFrame
+        tapView.setOnClickAction(onClick: messageClicked)
+    }
+    
+    private func messageClicked(){
+        presenter?.requestedToDeleteMessage(messageid: messageId, belongsToCurrentUser: belongsToCurentUser)
     }
 }

@@ -19,6 +19,7 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     
     var lastScrollTopPoint: CGFloat = 0
     var lastLoadedItemOffset = 0
+    var lastLocalMessageId = 0
     
     func viewDidLoad() {
         interactor?.loadLocalMessages()
@@ -40,6 +41,18 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     
     func userSentMessage(message: String) {
         interactor?.saveLocalMessage(messageEntity: CoreDataMessageEntityToSave(author: AppConstants.currentUserNickname, message: message))
+    }
+    
+    func requestedToDeleteMessage(messageid: Int, belongsToCurrentUser: Bool) {
+        // check if it's even in the list
+        if let itemIndex: Int = messageItems.firstIndex(where: { $0.messageId == messageid }) {
+            if !belongsToCurrentUser {
+                messageItems.remove(at: itemIndex)
+                view?.updateMessagesTable()
+            } else {
+                interactor?.deleteLocalMessage(messageId: messageid)
+            }
+        }
     }
 }
 
@@ -72,7 +85,7 @@ extension MessengerPresenter: MessengerViewToPresenterTableViewProtocol {
             messageItems[indexPath.row].animationData.delayBeforeAnimation = timeDelay
         }
         
-        cell.setUp(viewModel: messageItems[indexPath.row])
+        cell.setUp(presenter: self, viewModel: messageItems[indexPath.row])
         messageItems[indexPath.row].animationData.needToAnimate = false
         return cell
     }
@@ -106,7 +119,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
             let authorImageUrl = NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i)
             let messageText = messagesData.result[i]
             
-            let messageItem = prepareMessageItem(authorName: authorName, authorImageUrl: authorImageUrl, message: messageText, belongsToCurrentUser: false)
+            let messageItem = prepareMessageItem(authorName: authorName, authorImageUrl: authorImageUrl, message: messageText, belongsToCurrentUser: false, messageId: generateInternetMessageId())
             
             messageItems.append(messageItem)
         }
@@ -131,7 +144,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
             }
             let authorImageUrl = AppConstants.currentUserImageUrl
             
-            let messageItem = prepareMessageItem(authorName: authorName, authorImageUrl: authorImageUrl, message: messageText, belongsToCurrentUser: true)
+            let messageItem = prepareMessageItem(authorName: authorName, authorImageUrl: authorImageUrl, message: messageText, belongsToCurrentUser: true, messageId: Int(localMessages[i].messageId))
             
             messageItems.append(messageItem)
         }
@@ -145,21 +158,35 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
     }
     
     func localMessageSaved(localMessage: MessageDataItem) {
-        insertLatestUserMessage(author: localMessage.author ?? "ErrorAuthor", message: localMessage.message ?? "ErrorMessage")
+        insertLatestUserMessage(author: localMessage.author ?? "ErrorAuthor", message: localMessage.message ?? "ErrorMessage", messageId: Int(localMessage.messageId))
     }
     
-    private func insertLatestUserMessage(author: String, message: String){
-        var messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true)
+    private func generateInternetMessageId() -> Int {
+        lastLocalMessageId -= 1
+        return lastLocalMessageId
+    }
+    
+    private func insertLatestUserMessage(author: String, message: String, messageId: Int){
+        var messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true, messageId: messageId)
         messageItems.insert(messageViewModel, at: 0)
         view?.onLocalMessageSent()
     }
     
-    func prepareMessageItem(authorName: String, authorImageUrl: String, message: String, belongsToCurrentUser: Bool) -> MessageItemViewModel{
+    func deletedLocalMessage(messageId: Int, success: Bool) {
+        print("deletedLocalMessage: \(success)")
+        guard success, let itemIndex: Int = messageItems.firstIndex(where: { $0.messageId == messageId }) else {
+            return
+        }
+        messageItems.remove(at: itemIndex)
+        view?.updateMessagesTable()
+    }
+    
+    func prepareMessageItem(authorName: String, authorImageUrl: String, message: String, belongsToCurrentUser: Bool, messageId: Int) -> MessageItemViewModel{
         let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: message, messageBelongsToCurrentUser: belongsToCurrentUser)
         
         return MessageItemViewModel(authorRandomName: authorName,
                                       authorRandomImageUrl: authorImageUrl,
-                                               message: message, belongsToCurrentUser: belongsToCurrentUser, sizes: sizes)
+                                    message: message, belongsToCurrentUser: belongsToCurrentUser, messageId: messageId, sizes: sizes)
     }
     
     func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool) {

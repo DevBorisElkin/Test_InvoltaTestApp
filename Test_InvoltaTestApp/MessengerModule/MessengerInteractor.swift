@@ -55,7 +55,7 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
     }
     
     func loadLocalMessages() {
-        var items = coreDataManager.getMessageDataItems()
+        let items = coreDataManager.getMessageDataItems()
         presenter?.receivedLocalMessages(localMessages: items)
     }
     
@@ -65,5 +65,10 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
         }else{
             print("Error saving message to database")
         }
+    }
+    
+    func deleteLocalMessage(messageId: Int) {
+        let successDeletion = coreDataManager.deleteMessage(by: messageId)
+        presenter?.deletedLocalMessage(messageId: messageId, success: successDeletion)
     }
 }

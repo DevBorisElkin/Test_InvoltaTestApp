@@ -37,6 +37,7 @@
 		52A0EE0E28BAB0A700578154 /* MessagesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE0C28BAB0A700578154 /* MessagesModel.xcdatamodeld */; };
 		52A0EE1028BAB1C200578154 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */; };
 		52A0EE1228BAC48600578154 /* CoreDataIntermediateEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */; };
+		52A0EE1428BADCEE00578154 /* TapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1328BADCEE00578154 /* TapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		52A0EE0D28BAB0A700578154 /* MessagesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessagesModel.xcdatamodel; sourceTree = "<group>"; };
 		52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntermediateEntities.swift; sourceTree = "<group>"; };
+		52A0EE1328BADCEE00578154 /* TapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				525EFA2D28B95348007E0311 /* ShrinkingFooterView.swift */,
 				525EFA3528BA42E3007E0311 /* TitleView.swift */,
 				525EFA3728BA53D5007E0311 /* KeyboardView.swift */,
+				52A0EE1328BADCEE00578154 /* TapView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */,
 				525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */,
 				525EF9ED28B8EE72007E0311 /* SceneDelegate.swift in Sources */,
+				52A0EE1428BADCEE00578154 /* TapView.swift in Sources */,
 				52A0EE0E28BAB0A700578154 /* MessagesModel.xcdatamodeld in Sources */,
 				525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */,
 				525EFA2128B90AF2007E0311 /* NetworkRequestBuilder.swift in Sources */,
