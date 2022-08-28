@@ -134,7 +134,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         
         for i in 0 ..< messagesData.result.count {
             
-            let authorName = "Bob bb"
+            let authorName = RandomNicknameBuilder.createRandomNickname()
             let authorImageUrl = NetworkRequestBuilder.getRandomImageUrl(id: self.messageItems.count + i)
             let messageText = messagesData.result[i]
             
@@ -186,7 +186,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
     }
     
     private func insertLatestUserMessage(author: String, message: String, messageId: Int){
-        var messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true, messageId: messageId)
+        let messageViewModel = prepareMessageItem(authorName: AppConstants.currentUserNickname, authorImageUrl: AppConstants.currentUserImageUrl, message: message, belongsToCurrentUser: true, messageId: messageId)
         messageItems.insert(messageViewModel, at: 0)
         view?.onLocalMessageSent()
     }
