@@ -39,7 +39,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     func setUI(){
-        view.backgroundColor = #colorLiteral(red: 0.6736666451, green: 0.8496916506, blue: 0.9686274529, alpha: 1)
+        view.backgroundColor = UIColor(named: "mainView")
         setNavigationBar()
         setKeyboard()
         setTableView()

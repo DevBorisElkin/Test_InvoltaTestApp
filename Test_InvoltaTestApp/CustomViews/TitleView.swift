@@ -14,7 +14,7 @@ class TitleView: UIView {
     var safeAreaIndicator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.2330949306, green: 0.2231936157, blue: 0.2745918632, alpha: 1)
+        view.backgroundColor = UIColor(named: "topSafeAreaSet")
         //view.backgroundColor = .clear
         return view
     }()
@@ -24,7 +24,7 @@ class TitleView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Тестовое задание"
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        label.textColor = .black
+        label.textColor = UIColor(named: "mainTextColorSet_1")
         label.textAlignment = .center
         return label
     }()
@@ -39,7 +39,7 @@ class TitleView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "mainColorSet_3")
         
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.08

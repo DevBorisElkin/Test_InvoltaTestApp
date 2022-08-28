@@ -14,10 +14,6 @@ class MessageCellConstants {
     static let messageAuthorLimitLines: CGFloat = 2
     static let messageTextFont = UIFont.systemFont(ofSize: 13, weight: .regular)
     
-    // MARK: Colors
-    static let messageAuthorFontColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1803921569, alpha: 1)
-    static let messageTextFontColor = #colorLiteral(red: 0.231372549, green: 0.2235294118, blue: 0.2705882353, alpha: 1)
-    
     // MARK: Sizes and insets
     static let cardViewOffset = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
     static let cardViewWidthOfScreenMult: CGFloat = 0.65

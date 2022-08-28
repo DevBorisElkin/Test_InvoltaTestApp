@@ -23,7 +23,7 @@ class MessageViewTableViewCell: UITableViewCell {
     
     lazy var cardView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.02747169717, green: 0.03649111719, blue: 0.06909978957, alpha: 1)
         view.layer.cornerRadius = 17
         return view
     }()
@@ -34,7 +34,7 @@ class MessageViewTableViewCell: UITableViewCell {
         view.backgroundColor = .clear
         //view.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         view.layer.cornerRadius = 17
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = UIColor(named: "messageBubble")
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 2, height: 1)
@@ -58,7 +58,7 @@ class MessageViewTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageAuthorFont
-        label.textColor = MessageCellConstants.messageAuthorFontColor
+        label.textColor = UIColor(named: "mainTextColorSet_1")
         return label
     }()
     
@@ -68,7 +68,7 @@ class MessageViewTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageTextFont
-        label.textColor = MessageCellConstants.messageTextFontColor
+        label.textColor = UIColor(named: "mainTextColorSet_1")
         return label
     }()
     
@@ -80,6 +80,7 @@ class MessageViewTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
         backgroundColor = .clear
         setUpConstraints()
     }

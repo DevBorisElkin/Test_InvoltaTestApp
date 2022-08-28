@@ -14,14 +14,14 @@ class MessageDetailsView: UIView {
     private var viewModel: MessageDetailsViewModel!
     
     // MARK: ColorSettings
-    private let backgroundFadeColor = #colorLiteral(red: 0.02357130427, green: 0.07965320206, blue: 0.1247922936, alpha: 1)
+    private let backgroundFadeColor = UIColor(named: "backgroundFade")!
     private let initialFade = 0.0
     private let targetFade = 0.7
     
     
     lazy var cardView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "messageBubble")
         view.layer.cornerRadius = 15
         
         // ?
@@ -51,7 +51,7 @@ class MessageDetailsView: UIView {
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.numberOfLines = 0
-        label.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        label.backgroundColor = UIColor(named: "messageTextBackground_1")
         //label.backgroundColor = .blue
         
         return label
@@ -65,7 +65,7 @@ class MessageDetailsView: UIView {
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.numberOfLines = 0
-        label.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        label.backgroundColor = UIColor(named: "messageTextBackground_1")
         //label.backgroundColor = .blue
         
         return label
@@ -111,7 +111,7 @@ class MessageDetailsView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         var buttonImage = UIImage(named: "close")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
-        button.imageView?.tintColor = #colorLiteral(red: 0.1941434309, green: 0.1875622977, blue: 0.2270490972, alpha: 1)
+        button.imageView?.tintColor = UIColor(named: "mainTextColorSet_1")
         button.backgroundColor = .clear
         return button
     }()

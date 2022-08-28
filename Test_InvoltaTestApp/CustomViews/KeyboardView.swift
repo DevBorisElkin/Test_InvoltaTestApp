@@ -20,7 +20,7 @@ class KeyboardView: UIView {
         
         //translatesAutoresizingMaskIntoConstraints = false
         //backgroundColor = .red
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "keyboardHolder")
         makeConstraints()
         makeOtherSettings()
     }
@@ -52,10 +52,10 @@ class InsertableTextField: UITextField, UITextFieldDelegate{
         super.init(frame: frame)
 
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = #colorLiteral(red: 0.9360918617, green: 0.9360918617, blue: 0.9360918617, alpha: 1)
+        backgroundColor = UIColor(named: "keyboardField")
         placeholder = "Type in message"
         font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        textColor = .black
+        textColor = UIColor(named: "keyboardText")
         clearButtonMode = .whileEditing
         borderStyle = .none
         layer.cornerRadius = 10
