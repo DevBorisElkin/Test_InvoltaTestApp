@@ -54,6 +54,22 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
             }
         }
     }
+    
+    func requestedToOpenMessageDetails(messageId: Int) {
+        
+        guard let relatedMessage = messageItems.first(where: { $0.messageId == messageId }) else {
+            print("Didn't find message with id \(messageId)")
+            return
+        }
+        
+        let messageDetails = MessageDetailsViewModel(
+            authorName: relatedMessage.authorRandomName,
+            authorRandomImageUrl: relatedMessage.authorRandomImageUrl,
+            message: relatedMessage.message,
+            belongsToCurrentUser: relatedMessage.belongsToCurrentUser,
+            messageId: relatedMessage.messageId)
+        view?.openMessageDetails(messageDetails: messageDetails)
+    }
 }
 
 // MARK: TableViewRelated

@@ -17,6 +17,7 @@ protocol MessengerViewToPresenterProtocol: AnyObject {
     func getMessages()
     func userSentMessage(message: String)
     func requestedToDeleteMessage(messageid: Int, belongsToCurrentUser: Bool)
+    func requestedToOpenMessageDetails(messageId: Int)
 }
 
 protocol MessengerViewToPresenterTableViewProtocol: AnyObject {
@@ -38,6 +39,7 @@ protocol MessengerPresenterToViewProtocol: AnyObject {
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool)
     func onLocalMessageSent()
     func updateMessagesTable()
+    func openMessageDetails(messageDetails: MessageDetailsViewModel)
 }
 
 protocol MessengerPresenterToInteractorProtocol: AnyObject {

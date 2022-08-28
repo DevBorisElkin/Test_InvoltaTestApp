@@ -145,6 +145,7 @@ class MessageViewTableViewCell: UITableViewCell {
     }
     
     private func messageClicked(){
-        presenter?.requestedToDeleteMessage(messageid: messageId, belongsToCurrentUser: belongsToCurentUser)
+        //presenter?.requestedToDeleteMessage(messageid: messageId, belongsToCurrentUser: belongsToCurentUser)
+        presenter?.requestedToOpenMessageDetails(messageId: messageId)
     }
 }

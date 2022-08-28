@@ -38,6 +38,7 @@
 		52A0EE1028BAB1C200578154 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */; };
 		52A0EE1228BAC48600578154 /* CoreDataIntermediateEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */; };
 		52A0EE1428BADCEE00578154 /* TapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1328BADCEE00578154 /* TapView.swift */; };
+		52A0EE1628BB7A3300578154 /* MessageDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1528BB7A3300578154 /* MessageDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		52A0EE0F28BAB1C200578154 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntermediateEntities.swift; sourceTree = "<group>"; };
 		52A0EE1328BADCEE00578154 /* TapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapView.swift; sourceTree = "<group>"; };
+		52A0EE1528BB7A3300578154 /* MessageDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				525EFA1B28B8FC35007E0311 /* MessageViewTableViewCell.swift */,
+				52A0EE1528BB7A3300578154 /* MessageDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				52A0EE0E28BAB0A700578154 /* MessagesModel.xcdatamodeld in Sources */,
 				525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */,
 				525EFA2128B90AF2007E0311 /* NetworkRequestBuilder.swift in Sources */,
+				52A0EE1628BB7A3300578154 /* MessageDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -152,6 +152,12 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     func updateMessagesTable(){
         tableView.reloadData()
     }
+    
+    func openMessageDetails(messageDetails: MessageDetailsViewModel) {
+        let detailsView = MessageDetailsView()
+        view.addSubview(detailsView)
+        detailsView.setUp(viewModel: messageDetails)
+    }
 }
 
 // MARK: Table view protocols

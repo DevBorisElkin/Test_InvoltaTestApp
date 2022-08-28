@@ -34,3 +34,11 @@ struct MessageItemViewModel {
         var cellHeight: CGFloat
     }
 }
+
+struct MessageDetailsViewModel {
+    var authorName: String
+    var authorRandomImageUrl: String
+    var message: String
+    var belongsToCurrentUser: Bool
+    var messageId: Int
+}
