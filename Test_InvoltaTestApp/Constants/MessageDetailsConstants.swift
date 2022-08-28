@@ -29,8 +29,8 @@ class MessageDetailsConstants {
     
     static let messageAuthorInsets = UIEdgeInsets(top: 8, left: 30, bottom: 5, right: 30)
     static let messageDateInsets = UIEdgeInsets(top: 8, left: 45, bottom: 5, right: 45)
-    static let messageTextInsets = UIEdgeInsets(top: 8, left: 9, bottom: 8, right: 9)
-    static let messageTextMinHeight: CGFloat = 30
+    static let messageTextInsets = UIEdgeInsets(top: 10, left: 9, bottom: 8, right: 9)
+    static let messageTextMinHeight: CGFloat = 20
     static let messageTextMaxLines: CGFloat = 8
     
     // MARK: Buttons insets
@@ -38,7 +38,7 @@ class MessageDetailsConstants {
     static let topRightCloseMessageDetailsButtonSize = CGSize(width: 20, height: 20)
     
     // Bottom buttons
-    static let buttonsStackViewInsets = UIEdgeInsets(top: 5, left: 5, bottom: 8, right: 5)
+    static let buttonsStackViewInsets = UIEdgeInsets(top: 7, left: 30, bottom: 12, right: 30)
     static let buttonsStackViewHeight: CGFloat = 20
     
     // ?
