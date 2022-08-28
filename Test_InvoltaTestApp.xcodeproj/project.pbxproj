@@ -39,6 +39,9 @@
 		52A0EE1228BAC48600578154 /* CoreDataIntermediateEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */; };
 		52A0EE1428BADCEE00578154 /* TapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1328BADCEE00578154 /* TapView.swift */; };
 		52A0EE1628BB7A3300578154 /* MessageDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1528BB7A3300578154 /* MessageDetailsView.swift */; };
+		52A0EE1828BB9BA300578154 /* MessageDetailsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1728BB9BA300578154 /* MessageDetailsConstants.swift */; };
+		52A0EE1A28BBA2B500578154 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1928BBA2B500578154 /* PaddingLabel.swift */; };
+		52A0EE1C28BBA73000578154 /* ExpandedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A0EE1B28BBA73000578154 /* ExpandedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,9 @@
 		52A0EE1128BAC48600578154 /* CoreDataIntermediateEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntermediateEntities.swift; sourceTree = "<group>"; };
 		52A0EE1328BADCEE00578154 /* TapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapView.swift; sourceTree = "<group>"; };
 		52A0EE1528BB7A3300578154 /* MessageDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailsView.swift; sourceTree = "<group>"; };
+		52A0EE1728BB9BA300578154 /* MessageDetailsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailsConstants.swift; sourceTree = "<group>"; };
+		52A0EE1928BBA2B500578154 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		52A0EE1B28BBA73000578154 /* ExpandedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,8 @@
 				525EFA3528BA42E3007E0311 /* TitleView.swift */,
 				525EFA3728BA53D5007E0311 /* KeyboardView.swift */,
 				52A0EE1328BADCEE00578154 /* TapView.swift */,
+				52A0EE1928BBA2B500578154 /* PaddingLabel.swift */,
+				52A0EE1B28BBA73000578154 /* ExpandedButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -169,6 +177,7 @@
 			children = (
 				525EFA1828B8FA69007E0311 /* AppConstants.swift */,
 				525EFA1D28B8FE5F007E0311 /* MessageCellConstants.swift */,
+				52A0EE1728BB9BA300578154 /* MessageDetailsConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -283,6 +292,7 @@
 				525EFA1C28B8FC35007E0311 /* MessageViewTableViewCell.swift in Sources */,
 				525EFA1228B8F8BA007E0311 /* MessengerPresenter.swift in Sources */,
 				525EFA1028B8F8AA007E0311 /* MessengerViewController.swift in Sources */,
+				52A0EE1A28BBA2B500578154 /* PaddingLabel.swift in Sources */,
 				52A0EE1228BAC48600578154 /* CoreDataIntermediateEntities.swift in Sources */,
 				525EFA1628B8F8D4007E0311 /* MessengerRouter.swift in Sources */,
 				525EFA0028B8F04E007E0311 /* Constraints.swift in Sources */,
@@ -301,12 +311,14 @@
 				525EFA1428B8F8C5007E0311 /* MessengerInteractor.swift in Sources */,
 				525EFA0628B8F0A9007E0311 /* TextHeight.swift in Sources */,
 				525EFA2828B91F02007E0311 /* MessageCellLayoutCalculator.swift in Sources */,
+				52A0EE1C28BBA73000578154 /* ExpandedButton.swift in Sources */,
 				525EFA1928B8FA69007E0311 /* AppConstants.swift in Sources */,
 				525EFA0B28B8F103007E0311 /* WebImageView.swift in Sources */,
 				525EF9ED28B8EE72007E0311 /* SceneDelegate.swift in Sources */,
 				52A0EE1428BADCEE00578154 /* TapView.swift in Sources */,
 				52A0EE0E28BAB0A700578154 /* MessagesModel.xcdatamodeld in Sources */,
 				525EFA3828BA53D5007E0311 /* KeyboardView.swift in Sources */,
+				52A0EE1828BB9BA300578154 /* MessageDetailsConstants.swift in Sources */,
 				525EFA2128B90AF2007E0311 /* NetworkRequestBuilder.swift in Sources */,
 				52A0EE1628BB7A3300578154 /* MessageDetailsView.swift in Sources */,
 			);

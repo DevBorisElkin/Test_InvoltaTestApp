@@ -155,6 +155,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     
     func openMessageDetails(messageDetails: MessageDetailsViewModel) {
         let detailsView = MessageDetailsView()
+        detailsView.presenter = presenter
         view.addSubview(detailsView)
         detailsView.setUp(viewModel: messageDetails)
     }

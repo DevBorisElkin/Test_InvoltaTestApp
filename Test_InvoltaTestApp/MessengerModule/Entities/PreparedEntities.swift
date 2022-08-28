@@ -41,4 +41,8 @@ struct MessageDetailsViewModel {
     var message: String
     var belongsToCurrentUser: Bool
     var messageId: Int
+    
+    func printValues() {
+        print("authorName: \(authorName)\nmessage: \(message)")
+    }
 }
