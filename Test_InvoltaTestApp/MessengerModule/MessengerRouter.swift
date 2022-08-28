@@ -27,7 +27,6 @@ class MessengerRouter: MessengerPresenterToRouterProtocol {
         viewController.presenter = presenter
         
         router.entry = viewController
-        
         return router
     }
 }

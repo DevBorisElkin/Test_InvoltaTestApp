@@ -65,6 +65,4 @@ protocol MessengerPresenterToRouterProtocol: AnyObject {
     var entry: EntryPoint? { get }
     
     static func start() -> MessengerPresenterToRouterProtocol
-    
-    // func pushTo // need method to open window with video details
 }

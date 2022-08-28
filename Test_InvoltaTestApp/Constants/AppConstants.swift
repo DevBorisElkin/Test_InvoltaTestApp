@@ -17,10 +17,10 @@ class AppConstants {
         safeAreaPadding = window.safeAreaInsets
     }
     
-    static let consecutiveNetworkAttempts = 5
+    static let consecutiveNetworkAttempts = 2
     
     // to see loading spinners and etc.
-    static let messagesRequestArtificialDelay: Double = 0.6
+    static let messagesRequestArtificialDelay: Double = 0.4
     
     static let expandCustomButtonsClickArea = CGPoint(x: 10, y: 10)
     

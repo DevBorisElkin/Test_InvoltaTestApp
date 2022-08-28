@@ -39,7 +39,7 @@ class TitleView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor(named: "mainColorSet_3")
+        backgroundColor = UIColor(named: "mainColorSet_2")
         
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.08

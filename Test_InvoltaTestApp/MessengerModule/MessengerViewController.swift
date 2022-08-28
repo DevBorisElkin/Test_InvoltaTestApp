@@ -140,6 +140,8 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
             self.tableView.tableFooterView = nil
             loadingView.endLoading()
             scrollToTop()
+            let areltController = UIHelpers.createAlertController(title: "Networking problems", message: "Tried to load data, failed on \(AppConstants.consecutiveNetworkAttempts) consecutive attempts, please check your internet connection!")
+            present(areltController, animated: true)
         }else {
             // error but continue loading, present something small like 'networking problems'
         }

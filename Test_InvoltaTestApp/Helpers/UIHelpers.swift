@@ -38,10 +38,11 @@ class UIHelpers{
         cardView.widthAnchor.constraint(equalToConstant: innerRectSize.width).isActive = true
         cardView.heightAnchor.constraint(equalToConstant: innerRectSize.height).isActive = true
         
-        cardView.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.2235294118, blue: 0.2705882353, alpha: 1)
+        cardView.backgroundColor = UIColor(named: "loadingViewBackground")
         cardView.layer.cornerRadius = 5
         
         let spinner = UIActivityIndicatorView()
+        spinner.color = UIColor(named: "loadingView")
         spinner.transform = CGAffineTransform(scaleX: 1, y: -1)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         cardView.addSubview(spinner)
