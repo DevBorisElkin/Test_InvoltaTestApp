@@ -20,7 +20,7 @@ class AppConstants {
     static let consecutiveNetworkAttempts = 2
     
     // to see loading spinners and etc.
-    static let messagesRequestArtificialDelay: Double = 0.4
+    static let messagesRequestArtificialDelay: Double = 0
     
     static let expandCustomButtonsClickArea = CGPoint(x: 10, y: 10)
     
@@ -34,6 +34,8 @@ class GeneralUIConstants {
     static var titleViewHeight: CGFloat { titleViewHeightAboveSafeArea + AppConstants.safeAreaPadding.top }
     
     // table view
+    static let tableViewTopInset: CGFloat = 5
+    static let tableViewBottomInset: CGFloat = 5
     static var tableViewHeight: CGFloat { AppConstants.screenHeight - titleViewHeight - keyboardParentHeight }
     static var tableViewRect: CGRect { CGRect(origin: CGPoint(x: 0, y: GeneralUIConstants.titleViewHeight), size: CGSize(width: AppConstants.screenWidth, height: GeneralUIConstants.tableViewHeight )) }
     static func calculateTableViewRectWithKeyboard(keyboardHeight: CGFloat) -> CGRect {
@@ -49,6 +51,12 @@ class GeneralUIConstants {
         let rect = keyboardFrame
         return CGRect(origin: CGPoint(x: 0, y: rect.minY - keyboardHeight + AppConstants.safeAreaPadding.bottom), size: rect.size)
     }
+    
+    // bad connection badge
+    static let badConnectionBadgeSize = CGSize(width: 40, height: 40)
+    static let badConnectionBadgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    static let badConnectionBadgeOrigin = CGPoint(x: AppConstants.screenWidth - badConnectionBadgeSize.width - badConnectionBadgeInsets.right, y: titleViewHeight + badConnectionBadgeInsets.top )
+    static let badConnectionBadgeFrame = CGRect(origin: badConnectionBadgeOrigin, size: badConnectionBadgeSize)
     
     static let keyboardInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     static let keyboardHeightAboveSafeArea: CGFloat = 34

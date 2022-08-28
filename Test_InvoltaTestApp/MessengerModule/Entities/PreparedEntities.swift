@@ -14,6 +14,7 @@ struct MessageItemViewModel {
     var message: String
     var belongsToCurrentUser: Bool
     var messageId: Int
+    var imageData: Data?
     var sizes: Sizes
     var animationData = AnimationSupportingData()
     
@@ -42,6 +43,7 @@ struct MessageDetailsViewModel {
     var belongsToCurrentUser: Bool
     var messageId: Int
     var sizes: Sizes
+    var image: Data?
     
     struct Sizes {
         var authorImageFrame: CGRect

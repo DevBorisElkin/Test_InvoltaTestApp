@@ -48,4 +48,8 @@ class WebImageView: UIImageView {
             self.image = UIImage(data: data)
         }
     }
+    
+    func set(imageData: Data) {
+        self.image = UIImage(data: imageData)
+    }
 }

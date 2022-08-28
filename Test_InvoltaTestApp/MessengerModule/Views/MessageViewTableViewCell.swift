@@ -119,7 +119,12 @@ class MessageViewTableViewCell: UITableViewCell {
         messageAuthorLabel.frame = viewModel.sizes.authorNameFame
         messageTextLabel.frame = viewModel.sizes.messageTextFrame
         
-        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        if let imageData = viewModel.imageData {
+            messageAuthorIconImage.set(imageData: imageData)
+        }else{
+            messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        }
+        
         messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.text = viewModel.message
         

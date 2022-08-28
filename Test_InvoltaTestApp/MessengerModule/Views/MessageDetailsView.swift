@@ -172,7 +172,11 @@ class MessageDetailsView: UIView {
         // MARK: Other views setting by frame
         cardView.addSubview(messageAuthorIconImage)
         messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
-        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        if let image = viewModel.image {
+            messageAuthorIconImage.set(imageData: image)
+        } else {
+            messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        }
         
         cardView.addSubview(messageAuthorLabel)
         messageAuthorLabel.frame = viewModel.sizes.authorNameFame

@@ -112,3 +112,57 @@ class LoadingView: UIView {
         spinner?.removeFromSuperview()
     }
 }
+
+class BlinkingImageView: UIView {
+    
+    let blinkInTime: CGFloat = 0.4
+    let blinkOutTime: CGFloat = 0.4
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return false
+    }
+    
+    let imageView: UIImageView = {
+        var imageView: UIImageView!
+        if let image = UIImage(named: "badInternet_1") {
+            imageView = UIImageView(image: image)
+        } else {
+            imageView = UIImageView(frame: .zero)
+        }
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(imageView)
+        imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        imageView.alpha = 0
+        blinkInAnimation()
+    }
+    
+    private func blinkInAnimation() {
+        UIView.animate(withDuration: blinkInTime) { [weak self] in
+            self?.imageView.alpha = 1
+        } completion: { [weak self] _ in
+            self?.blinkOutAnimation()
+        }
+    }
+    
+    private func blinkOutAnimation() {
+        UIView.animate(withDuration: blinkOutTime) { [weak self] in
+            self?.imageView.alpha = 0
+        } completion: { [weak self] _ in
+            self?.removeFromSuperview()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

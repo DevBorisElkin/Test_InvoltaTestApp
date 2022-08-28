@@ -48,8 +48,20 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
                 self?.presenter?.onMessagesLoadingFailed(error: NetworkingHelpers.NetworkRequestError.undefined, ranOutOfAttempts: ranOutOfAttempts)
                 return }
             
-            self?.presenter?.receivedMessages(messagesData: messagesData)
+            var messages = [MessageWithImageData]()
+            for i in 0 ..< messagesData.result.count {
+                let imageData = self?.loadImageData(urlString: NetworkRequestBuilder.getRandomImageUrl(id: i + messageOffset))
+                messages.append((messagesData.result[i], imageData))
+            }
+            
+            self?.presenter?.receivedMessages(messagesData: messages)
         }
+    }
+    
+    func loadImageData(urlString: String) -> Data? {
+        guard let url = URL(string: urlString) else {print("Wrong URL to load image"); return nil }
+        guard let imageData = try? Data(contentsOf: url) else {print("Something is wrong with loaded image, returning"); return nil }
+        return imageData
     }
     
     func loadLocalMessages() {

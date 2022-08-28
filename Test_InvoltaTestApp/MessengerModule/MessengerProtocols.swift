@@ -52,7 +52,7 @@ protocol MessengerPresenterToInteractorProtocol: AnyObject {
 }
 
 protocol MessengerInteractorToPresenterProtocol: AnyObject {
-    func receivedMessages(messagesData: MessagesWrapped)
+    func receivedMessages(messagesData: [MessageWithImageData])
     func onMessagesLoadingFailed(error: Error, ranOutOfAttempts: Bool)
     func receivedLocalMessages(localMessages: [MessageDataItem])
     func localMessageSaved(localMessage: MessageDataItem)

@@ -28,6 +28,8 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
+        tableView.contentInset.top = GeneralUIConstants.tableViewTopInset
+        tableView.contentInset.bottom = GeneralUIConstants.tableViewBottomInset
         return tableView
     }()
     
@@ -144,6 +146,8 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
             present(areltController, animated: true)
         }else {
             // error but continue loading, present something small like 'networking problems'
+            let internetWarningImage = BlinkingImageView(frame: GeneralUIConstants.badConnectionBadgeFrame)
+            view.addSubview(internetWarningImage)
         }
     }
     
