@@ -24,7 +24,6 @@ class MessageDetailsView: UIView {
         view.backgroundColor = UIColor(named: "messageBubble")
         view.layer.cornerRadius = 15
         
-        // ?
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 2, height: 1)
@@ -34,7 +33,6 @@ class MessageDetailsView: UIView {
     
     lazy var messageAuthorIconImage: WebImageView = {
         let imageView = WebImageView()
-        //imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.checkForAbsoluteUrl = false
         imageView.useShortUrlForCaching = true
         imageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -46,29 +44,24 @@ class MessageDetailsView: UIView {
     
     lazy var messageAuthorLabel: PaddingLabel = {
         let label = PaddingLabel()
-        //label.translatesAutoresizingMaskIntoConstraints = false
         label.font = MessageDetailsConstants.messageAuthorFont
         label.textColor = MessageDetailsConstants.messageAuthorFontColor
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.numberOfLines = 0
         label.backgroundColor = UIColor(named: "messageTextBackground_1")
-        //label.backgroundColor = .blue
         
         return label
     }()
     
     lazy var messageDateLabel: PaddingLabel = {
         let label = PaddingLabel()
-        //label.translatesAutoresizingMaskIntoConstraints = false
         label.font = MessageDetailsConstants.messageDateFont
         label.textColor = MessageDetailsConstants.messageDateFontColor
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.numberOfLines = 0
         label.backgroundColor = UIColor(named: "messageTextBackground_1")
-        //label.backgroundColor = .blue
-        
         return label
     }()
     
@@ -91,18 +84,15 @@ class MessageDetailsView: UIView {
         label.layer.cornerRadius = 8
         label.backgroundColor = #colorLiteral(red: 0.8924605481, green: 0.8924605481, blue: 0.8924605481, alpha: 1)
         label.textAlignment = .justified
-        //label.numberOfLines = 0
         return label
     }()
     
     lazy var bottomButtonsStackView: UIStackView = {
         let stackView = UIStackView()
-        //stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.spacing = 30
-        //stackView.backgroundColor = .lightGray
         return stackView
     }()
     
@@ -119,23 +109,19 @@ class MessageDetailsView: UIView {
     
     lazy var closeMessageDetailsButton: UIButton = {
         var button = UIButton()
-        //button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Назад", for: .normal)
         let buttonTextColor = #colorLiteral(red: 0.2392156869, green: 0.5184240254, blue: 0.9686274529, alpha: 1)
         button.setTitleColor(buttonTextColor, for: .normal)
         button.backgroundColor = .clear
-        //button.backgroundColor = .blue
         return button
     }()
     
     lazy var deleteMessageDetailsButton: UIButton = {
         var button = UIButton()
-        //button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Удалить", for: .normal)
         let buttonTextColor = #colorLiteral(red: 0.7443636798, green: 0.1364066129, blue: 0.2615735445, alpha: 1)
         button.setTitleColor(buttonTextColor, for: .normal)
         button.backgroundColor = .clear
-        //button.backgroundColor = .green
         return button
     }()
     

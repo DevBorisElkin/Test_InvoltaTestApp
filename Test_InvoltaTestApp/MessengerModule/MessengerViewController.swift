@@ -136,8 +136,6 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     func onFetchMessagesFail(error: Error, ranOutOfAttempts: Bool) {
-        //print("Failed to fetch messages: \(error)")
-        
         if ranOutOfAttempts {
             self.tableView.tableFooterView = nil
             loadingView.endLoading()
@@ -145,7 +143,6 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
             let areltController = UIHelpers.createAlertController(title: "Networking problems", message: "Tried to load data, failed on \(AppConstants.consecutiveNetworkAttempts) consecutive attempts, please check your internet connection!")
             present(areltController, animated: true)
         }else {
-            // error but continue loading, present something small like 'networking problems'
             let internetWarningImage = BlinkingImageView(frame: GeneralUIConstants.badConnectionBadgeFrame)
             view.addSubview(internetWarningImage)
         }
@@ -195,9 +192,7 @@ extension MessengerViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MessengerViewController: InsertableTextFieldDelegate {
-    func onTextChanged(text: String, isNotEmpty: Bool) {
-        // text changed
-    }
+    func onTextChanged(text: String, isNotEmpty: Bool) { }
     
     func onReturnButtonPressed(for text: String) {
         print("VC user sent message: \(text)")

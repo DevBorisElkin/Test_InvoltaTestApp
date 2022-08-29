@@ -11,18 +11,14 @@ import UIKit
 // MARK: SearchTitleView
 class KeyboardView: UIView {
     
-    
     var lastSearchText: String = ""
     var searchTextField = InsertableTextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        //translatesAutoresizingMaskIntoConstraints = false
-        //backgroundColor = .red
         backgroundColor = UIColor(named: "keyboardHolder")
         makeConstraints()
-        makeOtherSettings()
     }
     
     required init?(coder: NSCoder) {
@@ -36,11 +32,6 @@ class KeyboardView: UIView {
         searchTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: GeneralUIConstants.keyboardInsets.left).isActive = true
         searchTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -GeneralUIConstants.keyboardInsets.right).isActive = true
         searchTextField.heightAnchor.constraint(equalToConstant: GeneralUIConstants.keyboardHeightAboveSafeArea).isActive = true
-    }
-    
-    func makeOtherSettings(){
-//        searchTextField.textChangedDelegate = self
-//        searchTextField.delegate = self
     }
 }
 // MARK: InsertableTextField

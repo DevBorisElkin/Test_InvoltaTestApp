@@ -15,7 +15,6 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     
     var messageItems: [MessageItemViewModel] = []
     var isFetchingContent = false
-    var maxMessagesDetected: Int? // to use or not to use?
     
     var lastScrollTopPoint: CGFloat = 0
     var lastLoadedItemOffset = 0
@@ -32,7 +31,6 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     
     private func tryToLoadMessages(messageOffset: Int){
         if !isFetchingContent {
-            //print("LOADING MESSAGES")
             isFetchingContent = true
             view?.onFetchMessagesStarted(isInitialLoad: messageOffset == 0)
             interactor?.loadMessages(messageOffset: messageOffset)
@@ -44,7 +42,6 @@ class MessengerPresenter: MessengerViewToPresenterProtocol {
     }
     
     func requestedToDeleteMessage(messageid: Int, belongsToCurrentUser: Bool) {
-        // check if it's even in the list
         if let itemIndex: Int = messageItems.firstIndex(where: { $0.messageId == messageid }) {
             if !belongsToCurrentUser {
                 messageItems.remove(at: itemIndex)
@@ -97,7 +94,7 @@ extension MessengerPresenter: MessengerViewToPresenterTableViewProtocol {
         // reverse for table view
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         
-        // check appear time delay
+        // check animation time delay
         var timeDelay: Double = 0
         if(messageItems[indexPath.row].animationData.needToAnimate){
             timeDelay = UIHelpers.calculateTimeDelayBeforeAnimation()
@@ -117,7 +114,7 @@ extension MessengerPresenter: MessengerViewToPresenterTableViewProtocol {
         let topPoint = scrollView.contentOffset.y + scrollView.bounds.size.height
         let scrollPointToLoadMoreContent = scrollView.contentSize.height
         
-        // direction - up
+        // ensure direction - up
         if topPoint > lastScrollTopPoint {
             if(topPoint >= scrollPointToLoadMoreContent){
                 getMessages()

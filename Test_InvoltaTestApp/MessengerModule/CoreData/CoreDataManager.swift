@@ -33,7 +33,6 @@ class CoreDataManager {
             print("messageId: \(message.messageId)")
         }
         
-        //messages.sort(by: {$0.messageId < $1.messageId})
         messages.reverse()
         return messages
     }

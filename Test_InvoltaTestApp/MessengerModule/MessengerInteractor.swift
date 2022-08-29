@@ -24,7 +24,6 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
             
             while(messagesData == nil && currentFailedRequests < AppConstants.consecutiveNetworkAttempts) {
                 // MARK: LOAD MESSAGES
-                
                 resultVideosData = await NetworkingHelpers.loadDataFromUrlString(from: requestUrlString, printJsonAndRequestString: false)
                 
                 if AppConstants.messagesRequestArtificialDelay > 0 {
@@ -36,7 +35,6 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
                     messagesData = data
                 case .failure(let error):
                     currentFailedRequests += 1
-                    //print("failed at request, currentFailedRequests: \(currentFailedRequests)")
                     self?.presenter?.onMessagesLoadingFailed(error: error, ranOutOfAttempts: false)
                 case .none:
                     break
@@ -51,8 +49,6 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
             self?.presenter?.receivedMessages(messagesData: messagesData)
         }
     }
-    
-    
     
     func loadLocalMessages() {
         let items = coreDataManager.getMessageDataItems()

@@ -10,12 +10,10 @@ import UIKit
 
 class TitleView: UIView {
     
-    // use this to see safe area
     var safeAreaIndicator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: "topSafeAreaSet")
-        //view.backgroundColor = .clear
         return view
     }()
     

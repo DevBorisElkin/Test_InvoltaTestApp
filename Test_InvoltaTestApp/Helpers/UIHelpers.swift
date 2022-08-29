@@ -77,7 +77,6 @@ class UIHelpers{
             }
             self.lastItemPushed = DispatchTime.now() + thisTimeDelay
         }
-        //print("thisTimeDelay: \(thisTimeDelay)")
         return thisTimeDelay
     }
 }

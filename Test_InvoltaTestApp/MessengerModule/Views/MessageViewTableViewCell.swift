@@ -32,7 +32,6 @@ class MessageViewTableViewCell: UITableViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
-        //view.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         view.layer.cornerRadius = 17
         view.backgroundColor = UIColor(named: "messageBubble")
         view.layer.shadowColor = UIColor.black.cgColor
@@ -57,7 +56,6 @@ class MessageViewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageAuthorFont
         label.textColor = UIColor(named: "mainTextColorSet_1")
         return label
@@ -67,7 +65,6 @@ class MessageViewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        //label.backgroundColor = .blue
         label.font = MessageCellConstants.messageTextFont
         label.textColor = UIColor(named: "mainTextColorSet_1")
         return label
@@ -125,8 +122,7 @@ class MessageViewTableViewCell: UITableViewCell {
         messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.text = viewModel.message
         
-        //print("animate: \(viewModel.animationData.needToAnimate)")
-        
+        // MARK: Execute message appear animation
         if(!viewModel.animationData.needToAnimate){
             slidingView.frame = bounds
             cardView.frame = viewModel.sizes.cardViewFrame
@@ -148,7 +144,6 @@ class MessageViewTableViewCell: UITableViewCell {
     }
     
     private func messageClicked(){
-        //presenter?.requestedToDeleteMessage(messageid: messageId, belongsToCurrentUser: belongsToCurentUser)
         presenter?.requestedToOpenMessageDetails(messageId: messageId)
     }
 }

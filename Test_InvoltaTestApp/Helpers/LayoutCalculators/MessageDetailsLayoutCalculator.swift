@@ -44,7 +44,6 @@ class MessageDetailsLayoutCalculator {
         if !message.isEmpty {
             var height = message.height(width: messageFameWidth, font: MessageDetailsConstants.messageTextFont)
             
-            // check limit height for name label
             let limitHeight: CGFloat = MessageDetailsConstants.messageTextFont.lineHeight * MessageDetailsConstants.messageTextMaxLines
             if height > limitHeight {
                 height = MessageDetailsConstants.messageTextFont.lineHeight * MessageDetailsConstants.messageTextMaxLines

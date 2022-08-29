@@ -34,7 +34,6 @@ class MessageCellLayoutCalculator {
         if !authorName.isEmpty {
             var height = authorName.height(width: authorNameWidth, font: MessageCellConstants.messageAuthorFont)
             
-            // check limit height for name label
             let limitHeight: CGFloat = MessageCellConstants.messageAuthorFont.lineHeight * MessageCellConstants.messageAuthorLimitLines
             if height > limitHeight {
                 height = MessageCellConstants.messageAuthorFont.lineHeight * MessageCellConstants.messageAuthorLimitLines
