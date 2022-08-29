@@ -5,6 +5,7 @@ class WebImageView: UIImageView {
     
     private var currentUrlString: String?
     var checkForAbsoluteUrl: Bool = true
+    var useShortUrlForCaching: Bool = false
     
     func set(imageURL: String?, cacheAndRetrieveImage: Bool = true){
         
@@ -43,7 +44,11 @@ class WebImageView: UIImageView {
         
         if(cacheAndRetrieveImage){
             let cachedResponse = CachedURLResponse(response: response, data: data)
-            URLCache.shared.storeCachedResponse(cachedResponse, for: URLRequest(url: responseUrl))
+            if useShortUrlForCaching, let currentUrlString = currentUrlString, let url = URL(string: currentUrlString){
+                URLCache.shared.storeCachedResponse(cachedResponse, for: URLRequest(url: url))
+            } else {
+                URLCache.shared.storeCachedResponse(cachedResponse, for: URLRequest(url: responseUrl))
+            }
         }
         
         if !checkForAbsoluteUrl || responseUrl.absoluteString == currentUrlString {

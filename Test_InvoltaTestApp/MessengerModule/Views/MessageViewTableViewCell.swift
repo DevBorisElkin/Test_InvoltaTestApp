@@ -45,6 +45,7 @@ class MessageViewTableViewCell: UITableViewCell {
     lazy var messageAuthorIconImage: WebImageView = {
         let imageView = WebImageView()
         imageView.checkForAbsoluteUrl = false
+        imageView.useShortUrlForCaching = true
         imageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         imageView.layer.cornerRadius = MessageCellConstants.messageAuthorIconSize.width / 2
         imageView.layer.masksToBounds = true
@@ -116,14 +117,10 @@ class MessageViewTableViewCell: UITableViewCell {
         self.belongsToCurentUser = viewModel.belongsToCurrentUser
         
         messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
+        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
+        
         messageAuthorLabel.frame = viewModel.sizes.authorNameFame
         messageTextLabel.frame = viewModel.sizes.messageTextFrame
-        
-        if let imageData = viewModel.imageData {
-            messageAuthorIconImage.set(imageData: imageData)
-        }else{
-            messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
-        }
         
         messageAuthorLabel.text = viewModel.authorRandomName
         messageTextLabel.text = viewModel.message

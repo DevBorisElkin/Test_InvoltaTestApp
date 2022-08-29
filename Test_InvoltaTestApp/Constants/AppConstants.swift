@@ -20,7 +20,7 @@ class AppConstants {
     static let consecutiveNetworkAttempts = 2
     
     // to see loading spinners and etc.
-    static let messagesRequestArtificialDelay: Double = 0
+    static let messagesRequestArtificialDelay: Double = 0.4
     
     static let expandCustomButtonsClickArea = CGPoint(x: 10, y: 10)
     

@@ -36,6 +36,7 @@ class MessageDetailsView: UIView {
         let imageView = WebImageView()
         //imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.checkForAbsoluteUrl = false
+        imageView.useShortUrlForCaching = true
         imageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         imageView.layer.cornerRadius = (MessageDetailsConstants.messageAuthorIconSize.width / 2)
         imageView.layer.masksToBounds = true
@@ -172,12 +173,7 @@ class MessageDetailsView: UIView {
         // MARK: Other views setting by frame
         cardView.addSubview(messageAuthorIconImage)
         messageAuthorIconImage.frame = viewModel.sizes.authorImageFrame
-//        if let image = viewModel.image {
-//            messageAuthorIconImage.set(imageData: image)
-//        } else {
-//            messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
-//        }
-        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl, cacheAndRetrieveImage: false)
+        messageAuthorIconImage.set(imageURL: viewModel.authorRandomImageUrl)
         
         cardView.addSubview(messageAuthorLabel)
         messageAuthorLabel.frame = viewModel.sizes.authorNameFame

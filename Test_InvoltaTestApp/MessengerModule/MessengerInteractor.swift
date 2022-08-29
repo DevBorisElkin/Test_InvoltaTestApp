@@ -48,13 +48,7 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
                 self?.presenter?.onMessagesLoadingFailed(error: NetworkingHelpers.NetworkRequestError.undefined, ranOutOfAttempts: ranOutOfAttempts)
                 return }
             
-            var messages = [MessageWithImageData]()
-            for i in 0 ..< messagesData.result.count {
-                let imageData = NetworkingHelpers.loadImageData(urlString: NetworkRequestBuilder.getRandomImageUrl(id: i + messageOffset))
-                messages.append((messagesData.result[i], imageData))
-            }
-            
-            self?.presenter?.receivedMessages(messagesData: messages)
+            self?.presenter?.receivedMessages(messagesData: messagesData)
         }
     }
     

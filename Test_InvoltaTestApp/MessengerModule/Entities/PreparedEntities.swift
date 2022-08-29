@@ -14,7 +14,6 @@ struct MessageItemViewModel {
     var message: String
     var belongsToCurrentUser: Bool
     var messageId: Int
-    var imageData: Data?
     var sizes: Sizes
     var animationData = AnimationSupportingData()
     

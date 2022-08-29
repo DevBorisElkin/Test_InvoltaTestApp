@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias MessageWithImageData = (message: String, image: Data?)
-
 struct MessagesWrapped: Decodable {
     let result: [String]
 }
