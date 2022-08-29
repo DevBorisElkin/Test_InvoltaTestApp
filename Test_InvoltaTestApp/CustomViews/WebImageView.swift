@@ -15,6 +15,8 @@ class WebImageView: UIImageView {
             //print("couldn't convert url string to URL \(imageURL)")
             return }
         
+        print("imageURL[\(imageURL)] || url[\(url.absoluteString)]")
+        
         if cacheAndRetrieveImage, let cachedResponse = URLCache.shared.cachedResponse(for: URLRequest(url: url)){
             self.image = UIImage(data: cachedResponse.data)
             //print("load image from cache \(imageURL)")

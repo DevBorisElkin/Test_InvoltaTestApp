@@ -77,6 +77,13 @@ public class NetworkingHelpers{
         task.resume()
     }
     
+    // MARK: Load image
+    // not async
+    public static func loadImageData(urlString: String) -> Data? {
+        guard let url = URL(string: urlString) else {print("Wrong URL to load image"); return nil }
+        guard let imageData = try? Data(contentsOf: url) else {print("Something is wrong with loaded image, returning"); return nil }
+        return imageData
+    }
     // MARK: Better content loading with async await
     
     enum NetworkRequestError: Error {

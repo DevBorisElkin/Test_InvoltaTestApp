@@ -50,7 +50,7 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
             
             var messages = [MessageWithImageData]()
             for i in 0 ..< messagesData.result.count {
-                let imageData = self?.loadImageData(urlString: NetworkRequestBuilder.getRandomImageUrl(id: i + messageOffset))
+                let imageData = NetworkingHelpers.loadImageData(urlString: NetworkRequestBuilder.getRandomImageUrl(id: i + messageOffset))
                 messages.append((messagesData.result[i], imageData))
             }
             
@@ -58,11 +58,7 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
         }
     }
     
-    func loadImageData(urlString: String) -> Data? {
-        guard let url = URL(string: urlString) else {print("Wrong URL to load image"); return nil }
-        guard let imageData = try? Data(contentsOf: url) else {print("Something is wrong with loaded image, returning"); return nil }
-        return imageData
-    }
+    
     
     func loadLocalMessages() {
         let items = coreDataManager.getMessageDataItems()
