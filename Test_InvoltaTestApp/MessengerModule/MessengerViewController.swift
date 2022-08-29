@@ -11,13 +11,13 @@ import UIKit
 class MessengerViewController: UIViewController,  MessengerPresenterToViewProtocol {
     var presenter: MessengerPresenterProtocols?
     
-    var isKeyboardShown = false
+    private var isKeyboardShown = false
     
-    var titleView = TitleView()
+    private var titleView = TitleView()
     
-    var keyboardView = KeyboardView()
+    private var keyboardView = KeyboardView()
     
-    var loadingView: LoadingView = {
+    private var loadingView: LoadingView = {
         let loadingView = LoadingView()
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         loadingView.backgroundColor = .clear
@@ -40,7 +40,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         presenter?.viewDidLoad()
     }
     
-    func setUI(){
+    private func setUI(){
         view.backgroundColor = UIColor(named: "mainView")
         setNavigationBar()
         setKeyboard()
@@ -49,7 +49,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
     }
     
     // MARK: SET UI
-    func setNavigationBar() {
+    private func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
         
         view.addSubview(titleView)
@@ -59,7 +59,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         titleView.heightAnchor.constraint(equalToConstant: GeneralUIConstants.titleViewHeight).isActive = true
     }
     
-    func setKeyboard() {
+    private func setKeyboard() {
         view.addSubview(keyboardView)
         keyboardView.frame = GeneralUIConstants.keyboardFrame
         keyboardView.searchTextField.textChangedDelegate = self
@@ -98,7 +98,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func setTableView() {
+    private func setTableView() {
         
         view.addSubview(tableView)
         
@@ -111,7 +111,7 @@ class MessengerViewController: UIViewController,  MessengerPresenterToViewProtoc
         tableView.transform = CGAffineTransform (scaleX: 1,y: -1)
     }
     
-    func setLoadingView() {
+    private func setLoadingView() {
         view.addSubview(loadingView)
         loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadingView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 30).isActive = true

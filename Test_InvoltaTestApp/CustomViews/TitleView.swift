@@ -10,14 +10,14 @@ import UIKit
 
 class TitleView: UIView {
     
-    var safeAreaIndicator: UIView = {
+    private var safeAreaIndicator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: "topSafeAreaSet")
         return view
     }()
     
-    var label: UILabel = {
+    private var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Тестовое задание"
@@ -27,7 +27,7 @@ class TitleView: UIView {
         return label
     }()
     
-    var bottomSeparator: UIView = {
+    private var bottomSeparator: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.231372549, green: 0.2235294118, blue: 0.2705882353, alpha: 1)
@@ -51,7 +51,7 @@ class TitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpConstraints(){
+    private func setUpConstraints(){
         addSubview(safeAreaIndicator)
         safeAreaIndicator.topAnchor.constraint(equalTo: topAnchor).isActive = true
         safeAreaIndicator.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

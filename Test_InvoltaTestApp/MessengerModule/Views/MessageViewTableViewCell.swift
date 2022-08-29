@@ -12,23 +12,23 @@ class MessageViewTableViewCell: UITableViewCell {
     static let reuseId = "MessageViewTableViewCell"
     
     weak var presenter: MessengerViewToPresenterProtocol?
-    var messageId: Int!
-    var belongsToCurentUser: Bool!
+    private var messageId: Int!
+    private var belongsToCurentUser: Bool!
     
-    lazy var slidingView: UIView = {
+    private lazy var slidingView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
     
-    lazy var cardView: UIView = {
+    private lazy var cardView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.02747169717, green: 0.03649111719, blue: 0.06909978957, alpha: 1)
         view.layer.cornerRadius = 17
         return view
     }()
     
-    lazy var shadowView: UIView = {
+    private lazy var shadowView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
@@ -41,7 +41,7 @@ class MessageViewTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var messageAuthorIconImage: WebImageView = {
+    private lazy var messageAuthorIconImage: WebImageView = {
         let imageView = WebImageView()
         imageView.checkForAbsoluteUrl = false
         imageView.useShortUrlForCaching = true
@@ -52,7 +52,7 @@ class MessageViewTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    lazy var messageAuthorLabel: UILabel = {
+    private lazy var messageAuthorLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
@@ -61,7 +61,7 @@ class MessageViewTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var messageTextLabel: UILabel = {
+    private lazy var messageTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.backgroundColor = .clear
@@ -70,7 +70,7 @@ class MessageViewTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var tapView: TapView = {
+    private lazy var tapView: TapView = {
         let view = TapView()
         return view
     }()
@@ -92,7 +92,7 @@ class MessageViewTableViewCell: UITableViewCell {
         messageAuthorIconImage.set(imageURL: nil)
     }
     
-    func setUpConstraints(){
+    private func setUpConstraints(){
         // MARK: sliding view and cardView
         addSubview(slidingView)
         slidingView.addSubview(cardView)

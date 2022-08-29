@@ -11,7 +11,6 @@ import UIKit
 // MARK: SearchTitleView
 class KeyboardView: UIView {
     
-    var lastSearchText: String = ""
     var searchTextField = InsertableTextField()
     
     override init(frame: CGRect) {
@@ -60,7 +59,7 @@ class InsertableTextField: UITextField, UITextFieldDelegate{
         setUpOnTextEdited()
     }
 
-    func setUpOnTextEdited(){
+    private func setUpOnTextEdited(){
         addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         self.delegate = self
     }

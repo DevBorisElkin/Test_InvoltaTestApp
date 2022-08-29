@@ -197,7 +197,7 @@ extension MessengerPresenter: MessengerInteractorToPresenterProtocol {
         view?.updateMessagesTable()
     }
     
-    func prepareMessageItem(authorName: String, authorImageUrl: String, message: String, belongsToCurrentUser: Bool, messageId: Int) -> MessageItemViewModel{
+    private func prepareMessageItem(authorName: String, authorImageUrl: String, message: String, belongsToCurrentUser: Bool, messageId: Int) -> MessageItemViewModel{
         let sizes = MessageCellLayoutCalculator.calculateMessageCellSizes(authorName: authorName, messageText: message, messageBelongsToCurrentUser: belongsToCurrentUser)
         
         return MessageItemViewModel(authorRandomName: authorName,

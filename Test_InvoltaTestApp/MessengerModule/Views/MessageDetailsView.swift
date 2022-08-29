@@ -19,7 +19,7 @@ class MessageDetailsView: UIView {
     private let targetFade = 0.7
     
     
-    lazy var cardView: UIView = {
+    private lazy var cardView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "messageBubble")
         view.layer.cornerRadius = 15
@@ -31,7 +31,7 @@ class MessageDetailsView: UIView {
         return view
     }()
     
-    lazy var messageAuthorIconImage: WebImageView = {
+    private lazy var messageAuthorIconImage: WebImageView = {
         let imageView = WebImageView()
         imageView.checkForAbsoluteUrl = false
         imageView.useShortUrlForCaching = true
@@ -42,7 +42,7 @@ class MessageDetailsView: UIView {
         return imageView
     }()
     
-    lazy var messageAuthorLabel: PaddingLabel = {
+    private lazy var messageAuthorLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.font = MessageDetailsConstants.messageAuthorFont
         label.textColor = MessageDetailsConstants.messageAuthorFontColor
@@ -54,7 +54,7 @@ class MessageDetailsView: UIView {
         return label
     }()
     
-    lazy var messageDateLabel: PaddingLabel = {
+    private lazy var messageDateLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.font = MessageDetailsConstants.messageDateFont
         label.textColor = MessageDetailsConstants.messageDateFontColor
@@ -65,7 +65,7 @@ class MessageDetailsView: UIView {
         return label
     }()
     
-    lazy var messageTextLabel: UILabel = {
+    private lazy var messageTextLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
@@ -75,19 +75,19 @@ class MessageDetailsView: UIView {
         return label
     }()
     
-    lazy var messageTextView: UITextView = {
+    private lazy var messageTextView: UITextView = {
         let label = UITextView()
         label.font = MessageDetailsConstants.messageTextFont
         label.textColor = MessageDetailsConstants.messageTextFontColor
         label.isEditable = false
         label.isSelectable = false
         label.layer.cornerRadius = 8
-        label.backgroundColor = #colorLiteral(red: 0.8924605481, green: 0.8924605481, blue: 0.8924605481, alpha: 1)
+        label.backgroundColor = UIColor(named: "mainColorSet_2")
         label.textAlignment = .justified
         return label
     }()
     
-    lazy var bottomButtonsStackView: UIStackView = {
+    private lazy var bottomButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
@@ -96,7 +96,7 @@ class MessageDetailsView: UIView {
         return stackView
     }()
     
-    lazy var topRightcloseMessageDetailsButton: ExpandedButton = {
+    private lazy var topRightcloseMessageDetailsButton: ExpandedButton = {
         var button = ExpandedButton()
         button.clickIncreasedArea = AppConstants.expandCustomButtonsClickArea
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +107,7 @@ class MessageDetailsView: UIView {
         return button
     }()
     
-    lazy var closeMessageDetailsButton: UIButton = {
+    private lazy var closeMessageDetailsButton: UIButton = {
         var button = UIButton()
         button.setTitle("Назад", for: .normal)
         let buttonTextColor = #colorLiteral(red: 0.2392156869, green: 0.5184240254, blue: 0.9686274529, alpha: 1)
@@ -116,7 +116,7 @@ class MessageDetailsView: UIView {
         return button
     }()
     
-    lazy var deleteMessageDetailsButton: UIButton = {
+    private lazy var deleteMessageDetailsButton: UIButton = {
         var button = UIButton()
         button.setTitle("Удалить", for: .normal)
         let buttonTextColor = #colorLiteral(red: 0.7443636798, green: 0.1364066129, blue: 0.2615735445, alpha: 1)
@@ -215,7 +215,6 @@ class MessageDetailsView: UIView {
     
     @objc private func panGestureAction(_ panGesture: UIPanGestureRecognizer) {
         
-        // ?
         let translation = panGesture.translation(in: cardView)
         let horizontalMovement = translation.x / cardView.bounds.width
         let rightwardsMovement = fmaxf(Float(horizontalMovement), 0.0)

@@ -11,7 +11,7 @@ class MessengerInteractor: MessengerPresenterToInteractorProtocol {
     
     weak var presenter: MessengerInteractorToPresenterProtocol?
     
-    var coreDataManager = CoreDataManager()
+    private var coreDataManager = CoreDataManager()
     
     func loadMessages(messageOffset: Int) {
         let requestUrlString = NetworkRequestBuilder.createRequestUrlString(offset: messageOffset)
