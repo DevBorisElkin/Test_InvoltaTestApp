@@ -2,6 +2,8 @@
 
 ### Test task for middle iOS developer
 
+![](Test_InvoltaTestApp/Images/InvoltaTestAppPreview.gif)
+
 Тестовое задание на позицию Junior Ios Developer:
 Проект на языке Swift.
 Необходимо реализовать экран со списком сообщений (с помощью UIKit) с возможностью подгрузки сообщений с сервера. Сообщения должны располагаться снизу
